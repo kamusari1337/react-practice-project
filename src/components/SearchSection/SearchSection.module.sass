@@ -1,0 +1,32 @@
+@import ../../scss/_base
+
+.section
+	.container
+		position: relative
+		max-width: 1350px
+		margin: auto
+
+		padding: 22px 55px 40px
+		color: $black
+		background-color: $bg-second-color
+		border-radius: $section-border-radius
+		.header
+			display: flex
+			justify-content: space-between
+			align-items: center
+			padding-bottom: 20px
+			.title
+				font-size: 24px
+			.search
+				display: flex
+				align-items: center
+				column-gap: 10px
+				padding: 10px
+				border: $input-border
+				border-radius: $input-border-radius
+				cursor: pointer
+				input
+					all: unset
+					color: $black
+				input::placeholder
+					color: $black

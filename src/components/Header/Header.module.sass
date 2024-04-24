@@ -1,0 +1,31 @@
+@import ../../scss/_base
+
+.header
+	.container
+		position: relative
+		max-width: 1460px
+		margin: auto
+		.title
+			font-size: 24px
+			padding: 28.5px 0
+			text-align: center
+		.buttons
+			display: flex
+			padding: 33px 0
+			position: absolute
+			right: 0
+			top: 0
+			.list
+				margin: auto
+				display: flex
+				column-gap: 20px
+				.button
+					padding: 10px 20px
+					border: $btn-border
+					border-radius: $btn-border-radius
+					font-size: 16px
+					cursor: pointer
+					transition: .3s
+					&:hover
+						background-color: $white
+						color: $black
