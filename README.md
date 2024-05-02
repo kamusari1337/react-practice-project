@@ -1,5 +1,4 @@
 # Mangify Frontend
-
 ## Technologies
 
 -   React
