@@ -1,0 +1,55 @@
+@import ../_base
+
+.section
+	position: relative
+	width: 1200px
+	margin: 0 auto
+	padding: 22px 55px 40px
+
+	border-radius: $section-border-radius
+	color: $black
+	background-color: $white
+	.header
+		display: flex
+		justify-content: space-between
+		align-items: center
+		padding-bottom: 20px
+		.title
+			font-size: 24px
+		.search
+			display: flex
+			align-items: center
+			column-gap: 10px
+			.select
+				padding: 10px
+				background-color: $white
+				border: $input-border
+				border-radius: $input-border-radius
+				cursor: pointer
+			.searchInput
+				display: flex
+				align-items: center
+				position: relative
+				column-gap: 10px
+				padding: 10px
+				border: $input-border
+				border-radius: $input-border-radius
+				cursor: pointer
+				.mark
+					position: absolute
+					top: 10px
+					right: 15px
+					width: 20px
+				input
+					all: unset
+					color: $black
+				input::placeholder
+					color: $black
+	.list
+		display: flex
+		flex-wrap: wrap
+		row-gap: 40px
+		column-gap: 45px
+		.notFound
+			font-size: 20px
+			margin: 200px auto

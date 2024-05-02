@@ -1,0 +1,62 @@
+@import ../_base
+
+.section
+	display: flex
+	justify-content: space-between
+	flex-direction: row
+	column-gap: 40px
+
+	width: 1200px
+	margin: 0 auto
+	padding: 40px 55px
+
+	color: $black
+	background-color: $white
+	border-radius: $section-border-radius
+	.leftBlock
+		display: flex
+		flex-direction: column
+		row-gap: 20px
+		.cover
+			border: 1px solid $outline
+			border-radius: $card-border-radius
+			width: 300px
+		.actions
+			display: flex
+			justify-content: space-between
+			align-items: center
+			flex-direction: row
+			column-gap: 10px
+
+			border: 1px solid $outline
+			border-radius: $card-border-radius
+			padding: 10px
+
+			.price
+				font-size: 20px
+			.buttons
+				display: flex
+				column-gap: 10px
+				.button
+					cursor: pointer
+					width: 50px
+	.rightBlock
+		display: flex
+		flex-direction: column
+		row-gap: 20px
+
+		border: 1px solid $outline
+		border-radius: $card-border-radius
+		padding: 10px	
+
+		.title
+			display: flex
+			flex-direction: column
+			row-gap: 10px
+			text-align: left
+			.ru
+				font-size: 40px
+			.en
+				font-size: 24px
+		p
+			font-size: 20px

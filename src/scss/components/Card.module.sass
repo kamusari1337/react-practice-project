@@ -1,0 +1,42 @@
+@import ../_base
+
+.card
+
+	padding: 13px
+	font-size: 12px
+	border: $card-border
+	border-radius: $card-border-radius
+	transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out
+	cursor: pointer
+	p
+		font-weight: 600
+	&:hover
+		box-shadow: $card-box-shadow
+		transform: translateY(-5px)
+
+	.cover
+		width: 174px
+		height: 282px
+		object-fit: cover
+		border-radius: $card-border-radius
+	.title
+		max-width: 174px
+		margin: 10px 0
+		font-size: 14px
+		overflow: hidden
+		white-space: nowrap
+		text-overflow: ellipsis
+	.bottomLine
+		display: flex
+		justify-content: space-between
+		.bottomLineLeft
+			p
+				margin: 0
+		.bottomLineRight
+			display: flex
+			align-items: center
+			column-gap: 4px
+			a
+				display: flex
+				.likeButton .addButton
+					width: 32px

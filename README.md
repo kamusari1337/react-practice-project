@@ -1,3 +1,3 @@
-# Mungify
+# Mangify
 
-Frontend part of Mungify app
+Frontend part of Mangify app
