@@ -1,20 +1,22 @@
 import { useEffect } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import FavoritePage from './pages/FavoritePage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import MangaPage from './pages/MangaPage'
 import ProfilePage from './pages/ProfilePage'
 import RegisterPage from './pages/RegisterPage'
-import { useManga } from './store.js'
+import { useManga, useUser } from './store.js'
 
 const App = () => {
+	const navigate = useNavigate()
 	const getManga = useManga(state => state.getManga)
-	const getPopularManga = useManga(state => state.getPopularManga)
+	const getUser = useUser(state => state.getUser)
+	const isAuth = useUser(state => state.isAuth)
 
 	useEffect(() => {
+		getUser()
 		getManga()
-		getPopularManga()
 	}, [])
 
 	return (

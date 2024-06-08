@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BsCart2 } from 'react-icons/bs'
 import { FaRegHeart, FaRegUserCircle } from 'react-icons/fa'
+import { IoMdExit } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import styles from '../scss/components/Header.module.sass'
 import { useManga } from '../store'
@@ -25,7 +26,7 @@ const Header = () => {
 							<p>{cartValue} руб.</p>
 						</li>
 						<li>
-							<Link to={'/favorites'} className={styles.button} onClick={() => {}}>
+							<Link to={'/favorites'} className={styles.button}>
 								<FaRegHeart size={18} className="icon" />
 								<p>Закладки</p>
 							</Link>
@@ -34,6 +35,12 @@ const Header = () => {
 							<Link to={'/profile'} className={styles.button}>
 								<FaRegUserCircle size={18} className="icon" />
 								<p>Профиль</p>
+							</Link>
+						</li>
+						<li>
+							<Link to={'/login'} className={styles.button}>
+								<IoMdExit />
+								<p>Выход</p>
 							</Link>
 						</li>
 					</ul>

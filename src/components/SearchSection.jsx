@@ -19,7 +19,6 @@ const SearchSection = () => {
 				<div className={styles.header}>
 					<p className={styles.title}>{searchValue ? `Результаты поиска: ${searchValue}` : 'Все книги'}</p>
 					<div className={styles.search}>
-						<select className={styles.select}></select>
 						<div className={styles.searchInput}>
 							<img src="/icons/search.svg" alt="search-svg" />
 							{searchValue && <img className={styles.mark} onClick={() => setSearchValue('')} src="/icons/mark.svg" alt="" />}

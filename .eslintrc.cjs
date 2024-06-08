@@ -9,6 +9,7 @@ module.exports = {
 	rules: {
 		'react/prop-types': 'off',
 		'react/jsx-key': 'off',
+		'react-hooks/exhaustive-deps': 'off',
 		'no-unused-vars': 'off',
 		'react/jsx-no-target-blank': 'off',
 		'react/no-unescaped-entities': 'off',

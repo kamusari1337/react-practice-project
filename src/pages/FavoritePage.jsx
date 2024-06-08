@@ -7,7 +7,6 @@ import { useManga } from '../store'
 
 const FavoritePage = () => {
 	const favorites = useManga(state => state.favorites)
-	const favoritesAmount = useManga(state => state.favoritesAmount)
 
 	return (
 		<>
@@ -15,7 +14,7 @@ const FavoritePage = () => {
 			<div className={styles.section}>
 				<p className={styles.title}>Мои закладки</p>
 				<div className={styles.list}>
-					{favoritesAmount > 0 ? (
+					{favorites.length ? (
 						favorites.map(card => <Card key={card.id} {...card} />)
 					) : (
 						<div className={styles.notFound}>

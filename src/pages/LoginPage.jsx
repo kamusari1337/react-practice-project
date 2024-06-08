@@ -1,7 +1,22 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from '../scss/pages/LoginPage.module.sass'
+import { useUser } from '../store'
 
 const LoginPage = () => {
+	const [loginValue, setLoginValue] = useState('')
+	const [passwordValue, setPasswordValue] = useState('')
+	const { setLogin } = useUser(state => state.setLogin)
+	const { setPassword } = useUser(state => state.setPassword)
+	const { getUser } = useUser(state => state.getUser)
+
+	const submitData = async e => {
+		e.preventDefault()
+		setLogin(loginValue)
+		setPassword(passwordValue)
+		getUser()
+	}
+
 	return (
 		<>
 			<div className={styles.wrapper}>
@@ -14,14 +29,16 @@ const LoginPage = () => {
 					<div className={styles.list}>
 						<div className={styles.field}>
 							<img src="/icons/login-icon.png" alt="login-icon" />
-							<input type="text" placeholder="Логин" />
+							<input type="text" placeholder="Логин" value={loginValue} onChange={e => setLoginValue(e.target.value)} />
 						</div>
 						<div className={styles.field}>
 							<img src="/icons/password-icon.png" alt="password-icon" />
-							<input type="text" placeholder="Пароль" />
+							<input type="text" placeholder="Пароль" value={passwordValue} onChange={e => setPasswordValue(e.target.value)} />
 						</div>
+					</div>
+					<div className={styles.bottom}>
 						<div className={styles.button}>
-							<a href="#">Войти</a>
+							<a onClick={submitData}>Войти</a>
 						</div>
 						<div className={styles.link}>
 							Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
