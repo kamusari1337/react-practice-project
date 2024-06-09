@@ -1,6 +1,6 @@
 import styles from '../scss/components/Drawer.module.sass'
 import { useManga } from '../store'
-import CartItem from './CartItem'
+import { CartItem } from './CartItem'
 
 const Drawer = ({ onClose }) => {
 	const cartItems = useManga(state => state.cart)
@@ -60,4 +60,4 @@ const Drawer = ({ onClose }) => {
 	)
 }
 
-export default Drawer
+export { Drawer }

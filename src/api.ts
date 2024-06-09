@@ -1,8 +1,12 @@
 import axios from 'axios'
 
 export const getAllManga = async () => {
-	const response = await axios.get('http://127.0.0.1:5000/api/v1/manga')
-	return response.data['all_manga']
+	try {
+		const response = await axios.get('http://127.0.0.1:5000/api/v1/manga')
+		return response.data['all_manga']
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 export const getPopularManga = async () => {

@@ -1,6 +1,6 @@
 import styles from '../scss/components/PopularSection.module.sass'
 import { useManga } from '../store.js'
-import Card from './Card'
+import { Card } from './Card.js'
 
 const PopularSection = () => {
 	const popular = useManga(state => state.popular)
@@ -17,4 +17,4 @@ const PopularSection = () => {
 	)
 }
 
-export default PopularSection
+export { PopularSection }

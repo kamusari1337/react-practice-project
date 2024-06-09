@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
-import FavoritePage from './pages/FavoritePage'
-import HomePage from './pages/HomePage'
-import LoginPage from './pages/LoginPage'
-import MangaPage from './pages/MangaPage'
-import ProfilePage from './pages/ProfilePage'
-import RegisterPage from './pages/RegisterPage'
+import { FavoritePage } from './pages/Favorite.tsx'
+import { HomePage } from './pages/Home.tsx'
+import { LoginPage } from './pages/Login.tsx'
+import { MangaPage } from './pages/Manga.tsx'
+import { ProfilePage } from './pages/Profile.tsx'
+import { RegisterPage } from './pages/RegisterPage.tsx'
 import { useManga, useUser } from './store.js'
 
 const App = () => {
@@ -34,4 +34,4 @@ const App = () => {
 	)
 }
 
-export default App
+export { App }

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import styles from '../scss/pages/LoginPage.module.sass'
+import styles from '../scss/pages/Login.module.sass'
 import { useUser } from '../store'
 
-const LoginPage = () => {
+const Login = () => {
 	const [loginValue, setLoginValue] = useState('')
 	const [passwordValue, setPasswordValue] = useState('')
 	const { setLogin } = useUser(state => state.setLogin)
@@ -50,4 +50,4 @@ const LoginPage = () => {
 	)
 }
 
-export default LoginPage
+export { Login }

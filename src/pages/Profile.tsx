@@ -1,9 +1,9 @@
 import { CiFaceFrown } from 'react-icons/ci'
 import { Link } from 'react-router-dom'
-import Header from '../components/Header'
-import styles from '../scss/pages/ProfilePage.module.sass'
+import { Header } from '../components/Header'
+import styles from '../scss/pages/Profile.module.sass'
 
-const ProfilePage = () => {
+const Profile = () => {
 	const purchases = []
 	const purchasesAmount = purchases.length
 
@@ -33,4 +33,4 @@ const ProfilePage = () => {
 	)
 }
 
-export default ProfilePage
+export { Profile }

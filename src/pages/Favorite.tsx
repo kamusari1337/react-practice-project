@@ -1,11 +1,11 @@
 import { CiFaceMeh } from 'react-icons/ci'
 import { Link } from 'react-router-dom'
-import Card from '../components/Card'
-import Header from '../components/Header'
-import styles from '../scss/pages/FavoritePage.module.sass'
+import { Card } from '../components/Card'
+import { Header } from '../components/Header'
+import styles from '../scss/pages/Favorite.module.sass'
 import { useManga } from '../store'
 
-const FavoritePage = () => {
+const Favorite = () => {
 	const favorites = useManga(state => state.favorites)
 
 	return (
@@ -33,4 +33,4 @@ const FavoritePage = () => {
 	)
 }
 
-export default FavoritePage
+export { Favorite }

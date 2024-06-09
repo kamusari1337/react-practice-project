@@ -5,7 +5,7 @@ import { IoMdExit } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import styles from '../scss/components/Header.module.sass'
 import { useManga } from '../store'
-import Drawer from './Drawer'
+import { Drawer } from './Drawer'
 
 const Header = () => {
 	const cartValue = useManga(state => state.cartValue)
@@ -50,4 +50,4 @@ const Header = () => {
 	)
 }
 
-export default Header
+export { Header }

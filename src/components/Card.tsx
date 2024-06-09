@@ -39,4 +39,4 @@ const Card = ({ id, wrap_path, title, price, isAdded, isFavorite }) => {
 	)
 }
 
-export default Card
+export { Card }

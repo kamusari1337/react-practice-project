@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { registerUser } from '../api'
-import styles from '../scss/pages/RegisterPage.module.sass'
+import styles from '../scss/pages/Register.module.sass'
 
-const RegisterPage = () => {
+const Register = () => {
 	const [loginValue, setLoginValue] = useState('')
 	const [emailValue, setEmailValue] = useState('')
 	const [passwordValue, setPasswordValue] = useState('')
@@ -48,4 +48,4 @@ const RegisterPage = () => {
 	)
 }
 
-export default RegisterPage
+export { Register }

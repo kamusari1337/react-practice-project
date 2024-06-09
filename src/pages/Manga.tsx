@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getSimilar } from '../api'
-import Header from '../components/Header'
+import { Header } from '../components/Header'
 import styles from '../scss/pages/MangaPage.module.sass'
 import { useManga } from '../store'
 
@@ -70,4 +70,4 @@ function MangaPage() {
 	)
 }
 
-export default MangaPage
+export { MangaPage }

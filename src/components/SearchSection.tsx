@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from '../scss/components/SearchSection.module.sass'
 import { useManga } from '../store.js'
-import Card from './Card'
+import { Card } from './Card.js'
 
 const SearchSection = () => {
 	const [searchValue, setSearchValue] = useState('')
@@ -40,4 +40,4 @@ const SearchSection = () => {
 	)
 }
 
-export default SearchSection
+export { SearchSection }

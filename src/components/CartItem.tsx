@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from '../scss/components/CartItem.module.sass'
 import { useManga } from '../store'
@@ -29,4 +28,4 @@ const CartItem = ({ id, wrap_path, title, price }) => {
 	)
 }
 
-export default CartItem
+export { CartItem }
