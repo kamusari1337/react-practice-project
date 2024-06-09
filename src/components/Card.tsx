@@ -2,19 +2,30 @@ import { Link } from 'react-router-dom'
 import styles from '../scss/components/Card.module.sass'
 import { useManga } from '../store'
 
-const Card = ({ id, wrap_path, title, price, isAdded, isFavorite }) => {
+interface CardProps {
+	id: number
+	wrap_path: string
+	title: string
+	price: number
+	isAdded: boolean
+	isFavorite: boolean
+}
+
+const Card = ({ id, wrap_path, title, price, isAdded, isFavorite }: CardProps) => {
 	const addToCart = useManga(state => state.addToCart)
 	const removeFromCart = useManga(state => state.removeFromCart)
 
 	const addToFavorite = useManga(state => state.addToFavorite)
 	const removeFromFavorite = useManga(state => state.removeFromFavorite)
 
+	const mangaParams = { id, wrap_path, title, price, isAdded, isFavorite }
+
 	const onClickFavorite = () => {
-		isFavorite ? removeFromFavorite({ id }) : addToFavorite({ id, wrap_path, title, price, isAdded, isFavorite })
+		isFavorite ? removeFromFavorite(id) : addToFavorite(mangaParams)
 	}
 
 	const onClickPlus = () => {
-		isAdded ? removeFromCart({ id, price }) : addToCart({ id, wrap_path, title, price, isAdded, isFavorite })
+		isAdded ? removeFromCart(id, price) : addToCart(mangaParams)
 	}
 
 	return (

@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { IoPersonSharp } from 'react-icons/io5'
+import { MdEmail } from 'react-icons/md'
+import { RiLockPasswordFill } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
 import { registerUser } from '../api'
 import styles from '../scss/pages/Register.module.sass'
@@ -24,15 +27,15 @@ const Register = () => {
 					<div className={styles.title}>Регистрация</div>
 					<div className={styles.list}>
 						<div className={styles.field}>
-							<img src="/icons/login-icon.png" alt="login-icon" />
+							<IoPersonSharp />
 							<input type="text" placeholder="Логин" value={loginValue} onChange={e => setLoginValue(e.target.value)} />
 						</div>
 						<div className={styles.field}>
-							<img src="/icons/email-icon.png" alt="email-icon" style={{ width: '20px' }} />
+							<MdEmail />
 							<input type="text" placeholder="Почта" value={emailValue} onChange={e => setEmailValue(e.target.value)} />
 						</div>
 						<div className={styles.field}>
-							<img src="/icons/password-icon.png" alt="password-icon" />
+							<RiLockPasswordFill />
 							<input type="text" placeholder="Пароль" value={passwordValue} onChange={e => setPasswordValue(e.target.value)} />
 						</div>
 						<div className={styles.button} onClick={register}>

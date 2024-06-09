@@ -1,30 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { getSimilar } from '../api'
 import { Header } from '../components/Header'
 import styles from '../scss/pages/Manga.module.sass'
 import { useManga } from '../store'
 
 function Manga() {
-	const { id } = useParams()
-	const intId = parseInt(id)
-	const { author, description, isAdded, isFavorite, price, title, wrap_path, genre } = useManga(state => state.mangas[intId - 1])
+	const id = +useParams()!
+	const { author, description, isAdded, isFavorite, price, title, wrap_path, genre } = useManga(state => state.mangas[id - 1])
+
 	const addToCart = useManga(state => state.addToCart)
 	const removeFromCart = useManga(state => state.removeFromCart)
+
 	const addToFavorite = useManga(state => state.addToFavorite)
 	const removeFromFavorite = useManga(state => state.removeFromFavorite)
-	const [similar, setSimilar] = useState([])
+
+	const similarManga = useManga(state => state.similarManga)
+	const getSimilarManga = useManga(state => state.getSimilarManga)
 
 	useEffect(() => {
-		getSimilar(intId, setSimilar)
+		getSimilarManga(id)
 	}, [])
 
 	const onClickFavorite = () => {
-		isFavorite ? removeFromFavorite({ id: intId }) : addToFavorite({ id: intId, wrap_path, title, price, isAdded, isFavorite })
+		isFavorite ? removeFromFavorite(id) : addToFavorite({ id: id, wrap_path, title, price, isAdded, isFavorite })
 	}
 
 	const onClickPlus = () => {
-		isAdded ? removeFromCart({ id: intId, price }) : addToCart({ id: intId, wrap_path, title, price, isAdded, isFavorite })
+		isAdded ? removeFromCart(id, price) : addToCart({ id: id, wrap_path, title, price, isAdded, isFavorite })
 	}
 
 	return (
@@ -62,7 +64,7 @@ function Manga() {
 					</p>
 					<p>
 						<b>Похожее: </b>
-						{similar.length > 0 ? similar.map(manga => manga.title).join(', ') : 'Ничего похожего не найдено'}
+						{similarManga.length > 0 ? similarManga.map(manga => manga.title).join(', ') : 'Ничего похожего не найдено'}
 					</p>
 				</div>
 			</div>

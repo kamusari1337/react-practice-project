@@ -2,10 +2,17 @@ import { Link } from 'react-router-dom'
 import styles from '../scss/components/CartItem.module.sass'
 import { useManga } from '../store'
 
-const CartItem = ({ id, wrap_path, title, price }) => {
+interface CardProps {
+	id: number
+	wrap_path: string
+	title: string
+	price: number
+}
+
+const CartItem = ({ id, wrap_path, title, price }: CardProps) => {
 	const removeFromCart = useManga(state => state.removeFromCart)
 	const onDeleteCartItem = () => {
-		removeFromCart({ id, price })
+		removeFromCart(id, price)
 	}
 
 	return (

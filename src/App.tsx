@@ -1,21 +1,19 @@
 import { useEffect } from 'react'
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { Favorite } from './pages/Favorite.tsx'
 import { Home } from './pages/Home.tsx'
 import { Login } from './pages/Login.tsx'
 import { Manga } from './pages/Manga.tsx'
 import { Profile } from './pages/Profile.tsx'
 import { Register } from './pages/Register.tsx'
-import { useManga, useUser } from './store.js'
+import { useManga } from './store.js'
 
 const App = () => {
-	const navigate = useNavigate()
 	const getManga = useManga(state => state.getManga)
-	const getUser = useUser(state => state.getUser)
-	const isAuth = useUser(state => state.isAuth)
+	// const getUser = useUser(state => state.getUser)
 
 	useEffect(() => {
-		getUser()
+		// getUser()
 		getManga()
 	}, [])
 

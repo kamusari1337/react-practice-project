@@ -1,129 +1,131 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { addToCart, addToFavorite, auth, getAllManga, getPopularManga, getUserInfo, removeFromCart, removeFromFavorite } from './api'
+import { Manga, MangaCard, MangaStore, UserStore } from '../interfaces'
+import { addToCart, addToFavorite, auth, getAllManga, getPopularManga, getSimilar, removeFromCart, removeFromFavorite } from './api'
 
-export const useManga = create()
-persist(
-	(set, get) => ({
-		mangas: [],
-		popular: [],
-		cart: [],
-		cartValue: 0,
-		favorites: [],
+export const useManga = create(
+	persist<MangaStore>(
+		(set, get) => ({
+			mangas: [],
+			popular: [],
+			cart: [],
+			cartValue: 0,
+			favorites: [],
+			purchases: [],
+			similarManga: [],
+			getManga: async () => {
+				const mangas: Manga[] = await getAllManga()
+				const popular: Manga[] = await getPopularManga()
+				set({ mangas: mangas, popular: popular })
 
-		getManga: async () => {
-			const mangas = await getAllManga()
-			const popular = await getPopularManga()
+				// const userId: number = JSON.parse(localStorage.getItem('user')!).state.userId
+				// const favorites: Manga[] = await getUserFavorites(userId)
 
-			const userId = JSON.parse(localStorage.getItem('user')).state.userId
-			const userInfo = await getUserInfo(userId)
+				// set({ favorites: favorites })
 
-			const cart = userInfo.cart
-			set({ cart: cart })
-			const cartValue = userInfo.cart.map(manga => manga.price).reduce((a, b) => a + b, 0)
-			set({ cartValue: cartValue })
+				// const updatedPopular = popular.map(manga => {
+				// 	return {
+				// 		...manga,
+				// 		isFavorite: favorites.some(item => item.id === manga.id),
+				// 	}
+				// })
+				// set({ popular: updatedPopular })
 
-			const favorites = userInfo.favourite_manga
-			set({ favorites: favorites })
+				// const updatedMangas = mangas.map(manga => {
+				// 	return {
+				// 		...manga,
+				// 		isFavorite: favorites.some(item => item.id === manga.id),
+				// 	}
+				// })
+				// set({ mangas: updatedMangas })
+			},
 
-			const updatedPopular = popular.map(manga => {
-				return {
-					...manga,
-					isAdded: cart.some(item => item.id === manga.id),
-					isFavorite: favorites.some(item => item.id === manga.id),
-				}
-			})
-			set({ popular: updatedPopular })
+			getSimilarManga: async id => {
+				const similarManga: Manga[] = await getSimilar(id)
+				set({ similarManga: similarManga })
+			},
 
-			const updatedMangas = mangas.map(manga => {
-				return {
-					...manga,
-					isAdded: cart.some(item => item.id === manga.id),
-					isFavorite: favorites.some(item => item.id === manga.id),
-				}
-			})
-			set({ mangas: updatedMangas })
-		},
+			addToCart: async (manga: MangaCard) => {
+				const userId = JSON.parse(localStorage.getItem('user')!).state.userId
+				await addToCart(userId, manga.id)
+				set({ cart: [...get().cart, manga] })
+				set({ cartValue: get().cartValue + manga.price })
+				set({
+					mangas: get().mangas.map(m => (m.id === manga.id ? { ...m, isAdded: true } : m)),
+				})
+				set({
+					popular: get().popular.map(m => (m.id === manga.id ? { ...m, isAdded: true } : m)),
+				})
+				set({
+					favorites: get().favorites.map(m => (m.id === manga.id ? { ...m, isAdded: true } : m)),
+				})
+			},
+			removeFromCart: async (id: number, price: number) => {
+				const userId = JSON.parse(localStorage.getItem('user')!).state.userId
+				await removeFromCart(userId, id)
+				const newCart = get().cart.filter(item => item.id !== id)
+				set({ cart: newCart })
+				set({ cartValue: get().cartValue - price })
+				set({
+					mangas: get().mangas.map(manga => (manga.id === id ? { ...manga, isAdded: false } : manga)),
+				})
+				set({
+					popular: get().popular.map(manga => (manga.id === id ? { ...manga, isAdded: false } : manga)),
+				})
+				set({
+					favorites: get().favorites.map(manga => (manga.id === id ? { ...manga, isAdded: false } : manga)),
+				})
+			},
 
-		addToCart: async manga => {
-			const userId = JSON.parse(localStorage.getItem('user')).state.userId
-			await addToCart(userId, manga.id)
-			set({ cart: [...get().cart, manga] })
-			set({ cartValue: get().cartValue + manga.price })
-			set({
-				mangas: get().mangas.map(m => (m.id === manga.id ? { ...m, isAdded: true } : m)),
-			})
-			set({
-				popular: get().popular.map(m => (m.id === manga.id ? { ...m, isAdded: true } : m)),
-			})
-			set({
-				favorites: get().favorites.map(m => (m.id === manga.id ? { ...m, isAdded: true } : m)),
-			})
-		},
-		removeFromCart: async manga => {
-			const userId = JSON.parse(localStorage.getItem('user')).state.userId
-			await removeFromCart(userId, manga.id)
-			const newCart = get().cart.filter(item => item.id !== manga.id)
-			set({ cart: newCart })
-			set({ cartValue: get().cartValue - manga.price })
-			set({
-				mangas: get().mangas.map(m => (m.id === manga.id ? { ...m, isAdded: false } : m)),
-			})
-			set({
-				popular: get().popular.map(m => (m.id === manga.id ? { ...m, isAdded: false } : m)),
-			})
-			set({
-				favorites: get().favorites.map(m => (m.id === manga.id ? { ...m, isAdded: false } : m)),
-			})
-		},
+			addToFavorite: async (manga: MangaCard) => {
+				const userId = JSON.parse(localStorage.getItem('user')!).state.userId
+				await addToFavorite(userId, manga.id)
+				set({ favorites: [...get().favorites, manga] })
+				set({
+					favorites: get().favorites.map(m => (m.id === manga.id ? { ...m, isFavorite: true } : m)),
+				})
+				set({
+					mangas: get().mangas.map(m => (m.id === manga.id ? { ...m, isFavorite: true } : m)),
+				})
+				set({
+					popular: get().popular.map(m => (m.id === manga.id ? { ...m, isFavorite: true } : m)),
+				})
+			},
 
-		addToFavorite: async manga => {
-			const userId = JSON.parse(localStorage.getItem('user')).state.userId
-			await addToFavorite(userId, manga.id)
-			set({ favorites: [...get().favorites, manga] })
-			set({
-				favorites: get().favorites.map(m => (m.id === manga.id ? { ...m, isFavorite: true } : m)),
-			})
-			set({
-				mangas: get().mangas.map(m => (m.id === manga.id ? { ...m, isFavorite: true } : m)),
-			})
-			set({
-				popular: get().popular.map(m => (m.id === manga.id ? { ...m, isFavorite: true } : m)),
-			})
-		},
-
-		removeFromFavorite: async manga => {
-			const userId = JSON.parse(localStorage.getItem('user')).state.userId
-			await removeFromFavorite(userId, manga.id)
-			const newFavorites = get().favorites.filter(item => item.id !== manga.id)
-			set({ favorites: newFavorites })
-			set({
-				favorites: get().favorites.map(m => (m.id === manga.id ? { ...m, isFavorite: false } : m)),
-			})
-			set({
-				mangas: get().mangas.map(m => (m.id === manga.id ? { ...m, isFavorite: false } : m)),
-			})
-			set({
-				popular: get().popular.map(m => (m.id === manga.id ? { ...m, isFavorite: false } : m)),
-			})
-		},
-	}),
-	{ name: 'mangas' }
+			removeFromFavorite: async (id: number) => {
+				const userId = JSON.parse(localStorage.getItem('user')!).state.userId
+				await removeFromFavorite(userId, id)
+				const newFavorites = get().favorites.filter(item => item.id !== id)
+				set({ favorites: newFavorites })
+				set({
+					favorites: get().favorites.map(manga => (manga.id === id ? { ...manga, isFavorite: false } : manga)),
+				})
+				set({
+					mangas: get().mangas.map(manga => (manga.id === id ? { ...manga, isFavorite: false } : manga)),
+				})
+				set({
+					popular: get().popular.map(manga => (manga.id === id ? { ...manga, isFavorite: false } : manga)),
+				})
+			},
+		}),
+		{ name: 'mangas' }
+	)
 )
 
-export const useUser = create()
-persist(
-	(set, get) => ({
-		username: 'user123',
-		password: '123',
-		isAuth: false,
-		userId: 2,
-		setLogin: login => set({ username: login }),
-		setPassword: password => set({ password: password }),
-		getUser: async () => {
-			const response = await auth(get().username, get().password)
-			set({ id: response.id, isAuth: true })
-		},
-	}),
-	{ name: 'user' }
+export const useUser = create(
+	persist<UserStore>(
+		(set, get) => ({
+			userId: 2,
+			username: 'user123',
+			password: '123',
+			isAuth: false,
+			setLogin: login => set({ username: login }),
+			setPassword: password => set({ password: password }),
+			getUser: async () => {
+				const response = await auth(get().username, get().password)
+				set({ userId: response.id, isAuth: true })
+			},
+		}),
+		{ name: 'user' }
+	)
 )

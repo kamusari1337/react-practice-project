@@ -7,10 +7,6 @@ const SearchSection = () => {
 	const [searchValue, setSearchValue] = useState('')
 	const mangas = useManga(state => state.mangas)
 
-	const onChangeSearchInput = e => {
-		setSearchValue(e.target.value)
-	}
-
 	const filteredArray = mangas ? mangas.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase())) : []
 
 	return (
@@ -22,7 +18,7 @@ const SearchSection = () => {
 						<div className={styles.searchInput}>
 							<img src="/icons/search.svg" alt="search-svg" />
 							{searchValue && <img className={styles.mark} onClick={() => setSearchValue('')} src="/icons/mark.svg" alt="" />}
-							<input onChange={onChangeSearchInput} value={searchValue} type="text" placeholder="Поиск..." />
+							<input onChange={e => setSearchValue(e.target.value)} value={searchValue} type="text" placeholder="Поиск..." />
 						</div>
 					</div>
 				</div>

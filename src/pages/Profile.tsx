@@ -1,10 +1,12 @@
 import { CiFaceFrown } from 'react-icons/ci'
 import { Link } from 'react-router-dom'
+import { Card } from '../components/Card'
 import { Header } from '../components/Header'
 import styles from '../scss/pages/Profile.module.sass'
+import { useManga } from '../store'
 
 const Profile = () => {
-	const purchases = []
+	const purchases = useManga(state => state.purchases)
 	const purchasesAmount = purchases.length
 
 	return (
@@ -14,7 +16,7 @@ const Profile = () => {
 				<div className={styles.title}>Мои покупки</div>
 				<div className={styles.list}>
 					{purchasesAmount > 0 ? (
-						purchases
+						purchases.map(manga => <Card key={manga.id} {...manga}></Card>)
 					) : (
 						<div className={styles.notFound}>
 							<CiFaceFrown size={200} className={styles.icon}></CiFaceFrown>

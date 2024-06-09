@@ -6,12 +6,11 @@ import { useUser } from '../store'
 const Login = () => {
 	const [loginValue, setLoginValue] = useState('')
 	const [passwordValue, setPasswordValue] = useState('')
-	const { setLogin } = useUser(state => state.setLogin)
-	const { setPassword } = useUser(state => state.setPassword)
-	const { getUser } = useUser(state => state.getUser)
+	const setLogin = useUser(state => state.setLogin)
+	const setPassword = useUser(state => state.setPassword)
+	const getUser = useUser(state => state.getUser)
 
-	const submitData = async e => {
-		e.preventDefault()
+	const submitData = () => {
 		setLogin(loginValue)
 		setPassword(passwordValue)
 		getUser()

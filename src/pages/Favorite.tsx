@@ -15,7 +15,7 @@ const Favorite = () => {
 				<p className={styles.title}>Мои закладки</p>
 				<div className={styles.list}>
 					{favorites.length ? (
-						favorites.map(card => <Card key={card.id} {...card} />)
+						favorites.map(manga => <Card key={manga.id} {...manga} />)
 					) : (
 						<div className={styles.notFound}>
 							<CiFaceMeh size={200} className={styles.icon} />

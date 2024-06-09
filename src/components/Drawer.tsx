@@ -2,7 +2,11 @@ import styles from '../scss/components/Drawer.module.sass'
 import { useManga } from '../store'
 import { CartItem } from './CartItem'
 
-const Drawer = ({ onClose }) => {
+interface DrawerProps {
+	onClose: () => void
+}
+
+const Drawer = ({ onClose }: DrawerProps) => {
 	const cartItems = useManga(state => state.cart)
 	const cartValue = useManga(state => state.cartValue)
 	const cartItemsLength = cartItems.length
