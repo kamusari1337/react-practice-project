@@ -22,13 +22,13 @@ const App = () => {
 	return (
 		<>
 			<Routes>
-				<Route exact path="/" element={<Home />} />
-				<Route exact path="/favorites" element={<Favorite />} />
-				<Route exact path="/profile" element={<Profile />}></Route>
-				<Route exact path="/manga/:id" element={<Manga />} />
-				<Route exact path="/login" element={<Login />} />
-				<Route exact path="/register" element={<Register />} />
-				<Route exact path="/*" element={<Navigate replace to={'/'} />} />
+				<Route path="/" element={<Home />} />
+				<Route path="/favorites" element={<Favorite />} />
+				<Route path="/profile" element={<Profile />}></Route>
+				<Route path="/manga/:id" element={<Manga />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/register" element={<Register />} />
+				<Route path="/*" element={<Navigate replace to={'/'} />} />
 			</Routes>
 		</>
 	)
