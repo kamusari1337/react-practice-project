@@ -2,6 +2,7 @@
 
 ## Technologies
 
+-   TypeScript
 -   React
 -   React Router DOM
 -   React Icons
