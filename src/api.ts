@@ -1,59 +1,122 @@
 import axios from 'axios'
 
-export const getAllManga = async () => {
+const API = axios.create({
+	baseURL: 'http://127.0.0.1:5000/api/v1',
+	headers: {
+		'Content-Type': 'application/json',
+	},
+	withCredentials: true,
+})
+
+export const getAllManga = async <Manga>() => {
 	try {
-		const response = await axios.get('http://127.0.0.1:5000/api/v1/manga')
-		return response.data['all_manga']
+		const response = await API.get<Manga>('/manga')
+		return response.data
 	} catch (error) {
-		console.log(error)
+		console.log(error, 'error')
 	}
 }
 
-export const getPopularManga = async () => {
-	const response = await axios.get('http://127.0.0.1:5000/api/v1/top_manga')
-	return response.data['top_manga']
+export const getPopularManga = async <Manga>() => {
+	try {
+		const response = await API.get<Manga>('/top_manga')
+		return response.data
+	} catch (error) {
+		console.log(error, 'error')
+	}
 }
 
-export const getSimilar = async (id, setFn) => {
-	const response = await axios.get(`http://127.0.0.1:5000/api/v1/similar_manga/${id}`)
-	setFn(response.data['similar_manga'])
-	return response.data['similar_manga']
+export const getSimilar = async <Manga>(id: number) => {
+	try {
+		const response = await API.get<Manga>(`/similar_manga/${id}`)
+		return response.data
+	} catch (error) {
+		console.log(error, 'error')
+	}
 }
 
-export const auth = async (username, psw) => {
-	const response = await axios.post('http://127.0.0.1:5000/auth', {
-		username: username,
-		psw: psw,
-	})
-	return response.data
+export const auth = async (username: string, psw: string) => {
+	try {
+		const response = await API.post('/auth', {
+			data: {
+				username: username,
+				psw: psw,
+			},
+		})
+		return response.data
+	} catch (error) {
+		console.log(error, 'error')
+	}
 }
 
-export const registerUser = async (username, psw, email) => {
-	const response = await axios.post('http://127.0.0.1:5000/api/v1/users', {
-		username: username,
-		psw: psw,
-		email: email,
-	})
-	return response.data
+export const registerUser = async (username: string, psw: string, email: string) => {
+	try {
+		const response = await API.post('/users', {
+			data: {
+				username: username,
+				psw: psw,
+				email: email,
+			},
+		})
+		return response.data
+	} catch (error) {
+		console.log(error, 'error')
+	}
 }
 
-export const getUserInfo = async id => {
-	const response = await axios.get(`http://127.0.0.1:5000/api/v1/user/${id}/info`)
-	return response.data
+export const getUserFavorites = async <Manga>(id: number) => {
+	try {
+		const response = await API.get<Manga>(`/user/${id}/info`)
+		return response.data
+	} catch (error) {
+		console.log(error, 'error')
+	}
 }
 
-export const addToCart = async (id, mangaId) => {
-	await axios.post(`http://127.0.0.1:5000/api/v1/users/${id}/add_to_cart`, { manga_id: mangaId })
+export const addToCart = async (id: number, mangaId: number) => {
+	try {
+		await API.post<number>(`/${id}/cart`, {
+			data: {
+				manga_id: mangaId,
+			},
+		})
+	} catch (error) {
+		console.log(error, 'error')
+	}
 }
 
-export const removeFromCart = async (id, mangaId) => {
-	await axios.delete(`http://127.0.0.1:5000/api/v1/users/${id}/delete_from_cart`, { manga_id: mangaId })
+export const removeFromCart = async (id: number, mangaId: number) => {
+	try {
+		await API.delete<number>(`/users/${id}/cart`, {
+			data: {
+				manga_id: mangaId,
+			},
+		})
+	} catch (error) {
+		console.log(error, 'error')
+	}
 }
 
-export const addToFavorite = async (id, mangaId) => {
-	await axios.post(`http://127.0.0.1:5000/api/v1/users/${id}/add_to_favourite_manga`, { manga_id: mangaId })
+export const addToFavorite = async (id: number, mangaId: number) => {
+	try {
+		await API.post<number>(`/users/${id}/favorite`, {
+			data: {
+				manga_id: mangaId,
+			},
+		})
+	} catch (error) {
+		console.log(error, 'error')
+	}
 }
 
-export const removeFromFavorite = async (id, mangaId) => {
-	await axios.delete(`http://127.0.0.1:5000/api/v1/users/${id}/delete_from_favourite_manga`, { manga_id: mangaId })
+export const removeFromFavorite = async (id: number, mangaId: number) => {
+	try {
+		await API.delete<number>(`/users/${id}/favorite`, {
+			data: {
+				manga_id: mangaId,
+			},
+		})
+	} catch (error) {
+		console.log(error, 'error')
+	}
 }
