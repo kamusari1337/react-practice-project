@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
-import { FavoritePage } from './pages/Favorite.tsx'
-import { HomePage } from './pages/Home.tsx'
-import { LoginPage } from './pages/Login.tsx'
-import { MangaPage } from './pages/Manga.tsx'
-import { ProfilePage } from './pages/Profile.tsx'
-import { RegisterPage } from './pages/RegisterPage.tsx'
+import { Favorite } from './pages/Favorite.tsx'
+import { Home } from './pages/Home.tsx'
+import { Login } from './pages/Login.tsx'
+import { Manga } from './pages/Manga.tsx'
+import { Profile } from './pages/Profile.tsx'
+import { Register } from './pages/Register.tsx'
 import { useManga, useUser } from './store.js'
 
 const App = () => {
@@ -22,12 +22,12 @@ const App = () => {
 	return (
 		<>
 			<Routes>
-				<Route exact path="/" element={<HomePage />} />
-				<Route exact path="/favorites" element={<FavoritePage />} />
-				<Route exact path="/profile" element={<ProfilePage />}></Route>
-				<Route exact path="/manga/:id" element={<MangaPage />} />
-				<Route exact path="/login" element={<LoginPage />} />
-				<Route exact path="/register" element={<RegisterPage />} />
+				<Route exact path="/" element={<Home />} />
+				<Route exact path="/favorites" element={<Favorite />} />
+				<Route exact path="/profile" element={<Profile />}></Route>
+				<Route exact path="/manga/:id" element={<Manga />} />
+				<Route exact path="/login" element={<Login />} />
+				<Route exact path="/register" element={<Register />} />
 				<Route exact path="/*" element={<Navigate replace to={'/'} />} />
 			</Routes>
 		</>

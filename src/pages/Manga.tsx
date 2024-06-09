@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getSimilar } from '../api'
 import { Header } from '../components/Header'
-import styles from '../scss/pages/MangaPage.module.sass'
+import styles from '../scss/pages/Manga.module.sass'
 import { useManga } from '../store'
 
-function MangaPage() {
+function Manga() {
 	const { id } = useParams()
 	const intId = parseInt(id)
 	const { author, description, isAdded, isFavorite, price, title, wrap_path, genre } = useManga(state => state.mangas[intId - 1])
@@ -70,4 +70,4 @@ function MangaPage() {
 	)
 }
 
-export { MangaPage }
+export { Manga }
