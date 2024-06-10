@@ -21,11 +21,11 @@ const CartItem = ({ id, wrap_path, title, price }: CardProps) => {
 				<Link to={`/manga/${id}`}>
 					<img width={100} height={157} src={wrap_path} alt={wrap_path} />
 				</Link>
-				<div className={styles.info}>
-					<div className={styles.header}>
+				<div className={styles.card__info}>
+					<div className={styles.card__info__header}>
 						<p>{title}</p>
 					</div>
-					<div className={styles.bottom}>
+					<div className={styles.card__info__bottom}>
 						<p>{price} руб.</p>
 						<img onClick={onDeleteCartItem} src="/icons/mark.svg" alt="delete" />
 					</div>

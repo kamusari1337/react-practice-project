@@ -7,8 +7,8 @@ const PopularSection = () => {
 
 	return (
 		<div className={styles.section}>
-			<p className={styles.title}>Популярное</p>
-			<div className={styles.list}>
+			<p className={styles.section__title}>Популярное</p>
+			<div className={styles.section__list}>
 				{popular.map(manga => (
 					<Card key={manga.id} {...manga} />
 				))}

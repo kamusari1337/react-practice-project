@@ -23,22 +23,22 @@ const Drawer = ({ onClose }: DrawerProps) => {
 					{cartItemsLength > 0 ? <h2 className={styles.title}>Корзина: {cartItems.length}</h2> : null}
 					{cartItems.length > 0 ? (
 						<>
-							<div className={styles.cartList}>
+							<div className={styles.drawer__cartList}>
 								{cartItems.map(card => (
 									<CartItem key={card.id} id={card.id} wrap_path={card.wrap_path} title={card.title} price={card.price} />
 								))}
 							</div>
-							<div className={styles.totalBlock}>
+							<div className={styles.drawer__totalBlock}>
 								<span>Итого:</span>
 								<div></div>
 								<b>{cartValue} руб.</b>
 							</div>
-							<div className={styles.button}>
+							<div className={styles.drawer__button}>
 								<a>Оформить заказ</a>
 							</div>
 						</>
 					) : (
-						<div className={styles.empty}>
+						<div className={styles.drawer__empty}>
 							<img src="/icons/empty-cart.png" alt="empty-cart" />
 							<h2>Ваша корзина пуста</h2>
 							<p>Добавьте хотя бы одну книгу</p>

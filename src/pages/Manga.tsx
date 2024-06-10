@@ -37,20 +37,20 @@ function Manga() {
 		<>
 			<Header></Header>
 			<div className={styles.section}>
-				<div className={styles.leftBlock}>
-					<img className={styles.cover} src={manga.wrap_path} alt="manga-cover" />
-					<div className={styles.actions}>
-						<p className={styles.price}>
+				<div className={styles.section__leftBlock}>
+					<img className={styles.section__leftBlock__cover} src={manga.wrap_path} alt="manga-cover" />
+					<div className={styles.section__leftBlock__actions}>
+						<p className={styles.section__leftBlock__actions__price}>
 							Цена: <span>{manga.price} руб</span>
 						</p>
-						<div className={styles.buttons}>
-							<img className={styles.button} onClick={onClickFavorite} src={manga.isFavorite ? '/icons/liked.svg' : '/icons/unliked.svg'} alt="like" />
-							<div className={styles.addButtons}>
+						<div className={styles.section__leftBlock__actions__buttons}>
+							<img onClick={onClickFavorite} src={manga.isFavorite ? '/icons/liked.svg' : '/icons/unliked.svg'} alt="like" />
+							<div className={styles.section__leftBlock__actions__buttons__modifyButtons}>
 								{manga.inCart > 0 ? (
 									<>
-										<img className={styles.addButton} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
-										<img className={styles.minusButton} onClick={onClickMinus} src="/icons/minus.svg" alt="minus-btn" />
-										<b className={styles.count}>{manga.inCart}</b>
+										<img onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
+										<img onClick={onClickMinus} src="/icons/minus.svg" alt="minus-btn" />
+										<b className={styles.section__leftBlock__actions__buttons__modifyButtons__count}>{manga.inCart}</b>
 									</>
 								) : (
 									<img className={styles.addButton} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
@@ -59,12 +59,12 @@ function Manga() {
 						</div>
 					</div>
 				</div>
-				<div className={styles.rightBlock}>
-					<div className={styles.title}>
-						<p className={styles.ru}>
+				<div className={styles.section__rightBlock}>
+					<div className={styles.section__rightBlock__title}>
+						<p className={styles.section__rightBlock__title__ru}>
 							<b>{manga.title}</b>
 						</p>
-						<p className={styles.en}>{manga.title_en}</p>
+						<p className={styles.section__rightBlock__title__en}>{manga.title_en}</p>
 					</div>
 					<p>
 						<b>Автор:</b> {manga.author}

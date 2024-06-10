@@ -15,36 +15,34 @@ const Header = () => {
 		<>
 			{cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
 			<div className={styles.header}>
-				<div className={styles.container}>
-					<Link to={'/'} className={styles.title}>
-						<p>Mangify</p>
-						<img width={40} src="/icons/book.svg" alt="" />
-					</Link>
-					<ul className={styles.list}>
-						<li className={styles.button} onClick={() => setCartOpened(value => !value)}>
-							<BsCart2 size={18} className="icon" />
-							<p>{cartValue} руб.</p>
-						</li>
-						<li>
-							<Link to={'/favorites'} className={styles.button}>
-								<FaRegHeart size={18} className="icon" />
-								<p>Закладки</p>
-							</Link>
-						</li>
-						<li>
-							<Link to={'/profile'} className={styles.button}>
-								<FaRegUserCircle size={18} className="icon" />
-								<p>Профиль</p>
-							</Link>
-						</li>
-						<li>
-							<Link to={'/login'} className={styles.button}>
-								<IoMdExit />
-								<p>Выход</p>
-							</Link>
-						</li>
-					</ul>
-				</div>
+				<Link to={'/'} className={styles.header__title}>
+					<p>Mangify</p>
+					<img width={40} src="/icons/book.svg" alt="" />
+				</Link>
+				<ul className={styles.header__list}>
+					<li className={styles.header__list__button} onClick={() => setCartOpened(value => !value)}>
+						<BsCart2 size={18} className="icon" />
+						<p>{cartValue} руб.</p>
+					</li>
+					<li>
+						<Link to={'/favorites'} className={styles.header__list__button}>
+							<FaRegHeart size={18} className="icon" />
+							<p>Закладки</p>
+						</Link>
+					</li>
+					<li>
+						<Link to={'/profile'} className={styles.header__list__button}>
+							<FaRegUserCircle size={18} className="icon" />
+							<p>Профиль</p>
+						</Link>
+					</li>
+					<li>
+						<Link to={'/login'} className={styles.header__list__button}>
+							<IoMdExit />
+							<p>Выход</p>
+						</Link>
+					</li>
+				</ul>
 			</div>
 		</>
 	)

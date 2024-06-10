@@ -13,17 +13,17 @@ const Profile = () => {
 		<>
 			<Header />
 			<div className={styles.section}>
-				<div className={styles.title}>Мои покупки</div>
-				<div className={styles.list}>
+				<div className={styles.section__title}>Мои покупки</div>
+				<div className={styles.section__list}>
 					{purchasesAmount > 0 ? (
 						purchases.map(manga => <Card key={manga.id} {...manga}></Card>)
 					) : (
-						<div className={styles.notFound}>
-							<CiFaceFrown size={200} className={styles.icon}></CiFaceFrown>
+						<div className={styles.section__list__notFound}>
+							<CiFaceFrown size={200} className={styles.section__list__notFound__icon} />
 							<b>У вас нет заказов</b>
 							<span>Вы нищеброд?</span>
 							<span>Оформите хотя бы один заказ.</span>
-							<Link to={'/'} className={styles.button}>
+							<Link to={'/'} className={styles.section__list__notFound__button}>
 								<img src="/icons/arrow-white.svg" alt="arrow" />
 								<p>Вернуться</p>
 							</Link>

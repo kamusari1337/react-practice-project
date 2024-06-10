@@ -3,25 +3,25 @@
 .section
 	display: flex
 	flex-direction: column
-	width: 1320px
+	width: $section-container-width
 	min-height: 100vh
 	height: 100%
 	margin: 0 auto
-	padding: 22px 55px 0
+	padding: $section-padding
 
 	color: $black
 	background-color: $white
-	border-radius: 12px 12px 0 0
-	.title
+	border-radius: $section-border-radius
+	.section__title
 		text-align: left
 		font-size: 24px
 		padding-bottom: 20px
-	.list
+	.section__list
 		display: flex
 		flex-wrap: wrap
 		row-gap: 40px
 		column-gap: 45px
-		.notFound
+		.section__list__notFound
 			display: flex
 			flex-direction: column
 			justify-content: center
@@ -33,9 +33,9 @@
 			span
 				color: $outline
 				font-size: 18px
-			.icon
+			.section__list__notFound__icon
 				color: $black
-			.button
+			.section__list__notFound__button
 				display: flex
 				justify-content: center
 				align-items: center

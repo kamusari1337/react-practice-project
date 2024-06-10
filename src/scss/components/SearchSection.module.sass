@@ -2,31 +2,25 @@
 
 .section
 	position: relative
-	width: 1320px
+	width: $section-container-width
 	margin: 0 auto
-	padding: 22px 55px 40px
+	padding: $section-padding
 
 	border-radius: $section-border-radius
 	color: $black
 	background-color: $white
-	.header
+	.section__header
 		display: flex
 		justify-content: space-between
 		align-items: center
 		padding-bottom: 20px
-		.title
+		.section__header__title
 			font-size: 24px
-		.search
+		.section__header__search
 			display: flex
 			align-items: center
 			column-gap: 10px
-			// .select
-			// 	padding: 10px
-			// 	background-color: $white
-			// 	border: $input-border
-			// 	border-radius: $input-border-radius
-			// 	cursor: pointer
-			.searchInput
+			.section__header__search_input
 				display: flex
 				align-items: center
 				position: relative
@@ -35,7 +29,7 @@
 				border: $input-border
 				border-radius: $input-border-radius
 				cursor: pointer
-				.mark
+				.section__header__search_input_mark
 					position: absolute
 					top: 10px
 					right: 15px
@@ -45,12 +39,12 @@
 					color: $black
 				input::placeholder
 					color: $black
-	.list
+	.section__list
 		display: flex
 		flex-wrap: wrap
 		justify-content: space-between
 		row-gap: 40px
 		column-gap: 45px
-		.notFound
+		.section__list__notFound
 			font-size: 20px
 			margin: 200px auto

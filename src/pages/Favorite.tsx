@@ -18,16 +18,16 @@ const Favorite = () => {
 		<>
 			<Header />
 			<div className={styles.section}>
-				<p className={styles.title}>Мои закладки</p>
-				<div className={styles.list}>
+				<p className={styles.section__title}>Мои закладки</p>
+				<div className={styles.section__list}>
 					{favorites.length ? (
 						favorites.map(manga => <Card key={manga.id} {...manga} />)
 					) : (
-						<div className={styles.notFound}>
-							<CiFaceMeh size={200} className={styles.icon} />
+						<div className={styles.section__list__notFound}>
+							<CiFaceMeh size={200} className={styles.section__list__notFound__icon} />
 							<b>Закладок нет</b>
 							<span>Вы ничего не добавляли в них ...</span>
-							<Link to={'/'} className={styles.button}>
+							<Link to={'/'} className={styles.section__list__notFound__button}>
 								<img src="/icons/arrow-white.svg" alt="arrow" />
 								<p>Вернуться</p>
 							</Link>

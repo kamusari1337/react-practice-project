@@ -24,24 +24,24 @@ const Register = () => {
 					<img width={40} src="/icons/book.svg" alt="logo" />
 				</div>
 				<div className={styles.section}>
-					<div className={styles.title}>Регистрация</div>
-					<div className={styles.list}>
-						<div className={styles.field}>
+					<div className={styles.section__title}>Регистрация</div>
+					<div className={styles.section__list}>
+						<div className={styles.section__list__field}>
 							<IoPersonSharp />
 							<input type="text" placeholder="Логин" value={loginValue} onChange={e => setLoginValue(e.target.value)} />
 						</div>
-						<div className={styles.field}>
+						<div className={styles.section__list__field}>
 							<MdEmail />
 							<input type="text" placeholder="Почта" value={emailValue} onChange={e => setEmailValue(e.target.value)} />
 						</div>
-						<div className={styles.field}>
+						<div className={styles.section__list__field}>
 							<RiLockPasswordFill />
 							<input type="text" placeholder="Пароль" value={passwordValue} onChange={e => setPasswordValue(e.target.value)} />
 						</div>
-						<div className={styles.button} onClick={register}>
+						<div className={styles.section__list__button} onClick={register}>
 							<p>Зарегистрироваться</p>
 						</div>
-						<div className={styles.link}>
+						<div className={styles.section__list__link}>
 							Уже есть аккаунт? <Link to="/login">Войти</Link>
 						</div>
 					</div>

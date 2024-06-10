@@ -6,7 +6,7 @@
 	font-size: 12px
 	border: $card-border
 	border-radius: $card-border-radius
-	transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out
+	transition: $card-hover-transition
 	cursor: pointer
 	p
 		font-weight: 600
@@ -14,41 +14,41 @@
 		box-shadow: $card-box-shadow
 		transform: translateY(-5px)
 
-	.cover
-		width: 200px
-		height: 320px
+	.card__cover
+		width: $card-cover-width
+		height: $card-cover-height
 		object-fit: cover
 		border-radius: $card-border-radius
-		transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out
-	.title
-		max-width: 174px
+	.card__title
+		max-width: $card-cover-width
 		margin: 10px 0
 		font-size: 14px
 		overflow: hidden
 		white-space: nowrap
 		text-overflow: ellipsis
-	.bottomLine
+	.card__bottomLine
 		display: flex
 		justify-content: space-between
-		.bottomLineLeft
+		.card__bottomLine__left
 			p
 				margin: 0
-		.bottomLineRight
+		.card__bottomLine__right
 			display: flex
 			align-items: center
 			column-gap: 4px
 			display: flex
-			.addButtons
+			.card__bottomLine__right_addButtons
 				display: flex
 				align-items: center
 				column-gap: 4px
-				.count
+				.card__bottomLine__right_addButtons_count
 					display: flex
 					align-items: center
 					justify-content: center
 					width: 32px
 					height: 32px
-					color: $black
+					color: $white
+					background-color: $black
 					font-size: 16px
 					border: $card-border
 					border-radius: $card-border-radius

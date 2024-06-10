@@ -7,7 +7,7 @@ const Home = () => {
 	return (
 		<>
 			<Header />
-			<div className={styles.container}>
+			<div className={styles.wrapper}>
 				<PopularSection />
 				<SearchSection />
 			</div>
