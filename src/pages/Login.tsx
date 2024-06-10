@@ -8,11 +8,14 @@ import { useUser } from '../store'
 const Login = () => {
 	const [loginValue, setLoginValue] = useState('')
 	const [passwordValue, setPasswordValue] = useState('')
+	const [showPassword, setShowPassword] = useState(false)
+
 	const setLogin = useUser(state => state.setLogin)
 	const setPassword = useUser(state => state.setPassword)
+
 	const getUser = useUser(state => state.getUser)
 
-	const submitData = () => {
+	const login = () => {
 		setLogin(loginValue)
 		setPassword(passwordValue)
 		getUser()
@@ -34,15 +37,18 @@ const Login = () => {
 						</div>
 						<div className={styles.section__list__field}>
 							<RiLockPasswordFill />
-							<input type="text" placeholder="Пароль" value={passwordValue} onChange={e => setPasswordValue(e.target.value)} />
+							<input type={showPassword ? 'text' : 'password'} placeholder="Пароль" value={passwordValue} onChange={e => setPasswordValue(e.target.value)} onMouseEnter={() => setShowPassword(true)} onMouseLeave={() => setShowPassword(false)} />
 						</div>
 					</div>
 					<div className={styles.section__bottom}>
 						<div className={styles.section__bottom__button}>
-							<a onClick={submitData}>Войти</a>
+							<a onClick={login}>Войти</a>
 						</div>
 						<div className={styles.section__bottom__link}>
-							Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
+							Нет аккаунта?{' '}
+							<Link to="/register">
+								<ins>Зарегистрироваться</ins>
+							</Link>
 						</div>
 					</div>
 				</div>

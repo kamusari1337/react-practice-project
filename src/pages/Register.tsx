@@ -3,21 +3,23 @@ import { IoPersonSharp } from 'react-icons/io5'
 import { MdEmail } from 'react-icons/md'
 import { RiLockPasswordFill } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
-import { registerUser } from '../api'
+import { ConfirmModal } from '../components/ConfirmModal'
 import styles from '../scss/pages/Register.module.sass'
 
 const Register = () => {
 	const [loginValue, setLoginValue] = useState('')
 	const [emailValue, setEmailValue] = useState('')
 	const [passwordValue, setPasswordValue] = useState('')
+	const [showPassword, setShowPassword] = useState(false)
+	const [showModal, setShowModal] = useState(false)
 
 	const register = async () => {
-		window.alert('Регистрация')
-		await registerUser(loginValue, passwordValue, emailValue)
+		setShowModal(true)
 	}
 
 	return (
 		<>
+			{showModal && <ConfirmModal setModal={() => setShowModal(false)} />}
 			<div className={styles.wrapper}>
 				<div className={styles.header}>
 					<p>Mungify</p>
@@ -36,13 +38,18 @@ const Register = () => {
 						</div>
 						<div className={styles.section__list__field}>
 							<RiLockPasswordFill />
-							<input type="text" placeholder="Пароль" value={passwordValue} onChange={e => setPasswordValue(e.target.value)} />
+							<input type={showPassword ? 'text' : 'password'} placeholder="Пароль" value={passwordValue} onChange={e => setPasswordValue(e.target.value)} onMouseEnter={() => setShowPassword(true)} onMouseLeave={() => setShowPassword(false)} />
 						</div>
-						<div className={styles.section__list__button} onClick={register}>
+					</div>
+					<div className={styles.section__bottom}>
+						<div className={styles.section__bottom__button} onClick={register}>
 							<p>Зарегистрироваться</p>
 						</div>
-						<div className={styles.section__list__link}>
-							Уже есть аккаунт? <Link to="/login">Войти</Link>
+						<div className={styles.section__bottom__link}>
+							Уже есть аккаунт?{' '}
+							<Link to="/login">
+								<ins>Войти</ins>
+							</Link>
 						</div>
 					</div>
 				</div>

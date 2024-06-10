@@ -20,12 +20,14 @@
 		color: $black
 		background-color: $white
 		border-radius: $section-border-radius
-		width: 500px
-		height: 391px
+		width: $form-section-width
+		display: flex
+		flex-direction: column
+		row-gap: 20px
 		.section__title
 			text-align: center
 			font-size: 20px
-			padding: 20px 0 40px
+			padding: 20px 0
 		.section__list
 			display: flex
 			flex-direction: column
@@ -38,17 +40,19 @@
 				padding: 10px
 				max-width: 300px
 
-				border: 1px solid $outline
-				border-radius: 40px
+				border: $input-border
+				border-radius: $input-border-radius
 				input
 					all: unset
 		.section__bottom
-			margin-top: 105px
+			display: flex
+			flex-direction: column
+			row-gap: 20px
 			.section__bottom__button
 				text-align: center
 				padding: 10px
 				width: 200px
-				margin: 0 auto 20px
+				margin: 0 auto
 				background-color: $black
 				color: $white
 				border-radius: $btn-border-radius
