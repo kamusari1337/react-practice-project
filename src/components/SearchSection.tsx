@@ -4,9 +4,9 @@ import { useManga } from '../store.js'
 import { Card } from './Card.js'
 
 const SearchSection = () => {
-	const [searchValue, setSearchValue] = useState('')
 	const mangas = useManga(state => state.mangas)
 
+	const [searchValue, setSearchValue] = useState('')
 	const filteredArray = mangas ? mangas.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase())) : []
 
 	return (
@@ -24,7 +24,7 @@ const SearchSection = () => {
 				</div>
 				<div className={styles.list}>
 					{filteredArray.length ? (
-						filteredArray.map(card => <Card key={card.title + card.id} {...card} />)
+						filteredArray.map(manga => <Card key={manga.id} {...manga} />)
 					) : (
 						<p className={styles.notFound}>
 							Ничего не найдено по запросу <b>"{searchValue}"</b>

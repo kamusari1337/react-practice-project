@@ -15,10 +15,11 @@
 		transform: translateY(-5px)
 
 	.cover
-		width: 174px
-		height: 282px
+		width: 200px
+		height: 320px
 		object-fit: cover
 		border-radius: $card-border-radius
+		transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out
 	.title
 		max-width: 174px
 		margin: 10px 0
@@ -36,7 +37,18 @@
 			display: flex
 			align-items: center
 			column-gap: 4px
-			a
+			display: flex
+			.addButtons
 				display: flex
-				.likeButton .addButton
+				align-items: center
+				column-gap: 4px
+				.count
+					display: flex
+					align-items: center
+					justify-content: center
 					width: 32px
+					height: 32px
+					color: $black
+					font-size: 16px
+					border: $card-border
+					border-radius: $card-border-radius

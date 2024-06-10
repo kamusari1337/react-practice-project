@@ -10,11 +10,13 @@ import { useManga } from './store.js'
 
 const App = () => {
 	const getManga = useManga(state => state.getManga)
+	const getCart = useManga(state => state.getCart)
 	// const getUser = useUser(state => state.getUser)
 
 	useEffect(() => {
 		// getUser()
 		getManga()
+		getCart()
 	}, [])
 
 	return (

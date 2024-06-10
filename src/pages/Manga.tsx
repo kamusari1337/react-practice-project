@@ -5,8 +5,8 @@ import styles from '../scss/pages/Manga.module.sass'
 import { useManga } from '../store'
 
 function Manga() {
-	const id = +useParams()!
-	const { author, description, isAdded, isFavorite, price, title, wrap_path, genre } = useManga(state => state.mangas[id - 1])
+	const id = +useParams().id!
+	const manga = useManga(state => state.mangas[id - 1])
 
 	const addToCart = useManga(state => state.addToCart)
 	const removeFromCart = useManga(state => state.removeFromCart)
@@ -19,14 +19,18 @@ function Manga() {
 
 	useEffect(() => {
 		getSimilarManga(id)
-	}, [])
+	}, [id])
 
 	const onClickFavorite = () => {
-		isFavorite ? removeFromFavorite(id) : addToFavorite({ id: id, wrap_path, title, price, isAdded, isFavorite })
+		manga.isFavorite ? removeFromFavorite(id) : addToFavorite(manga)
 	}
 
 	const onClickPlus = () => {
-		isAdded ? removeFromCart(id, price) : addToCart({ id: id, wrap_path, title, price, isAdded, isFavorite })
+		addToCart(manga)
+	}
+
+	const onClickMinus = () => {
+		removeFromCart(manga.id)
 	}
 
 	return (
@@ -34,33 +38,45 @@ function Manga() {
 			<Header></Header>
 			<div className={styles.section}>
 				<div className={styles.leftBlock}>
-					<img className={styles.cover} src={wrap_path} alt="manga-cover" />
+					<img className={styles.cover} src={manga.wrap_path} alt="manga-cover" />
 					<div className={styles.actions}>
-						<p className={styles.price}>Цена: {price} руб</p>
+						<p className={styles.price}>
+							Цена: <span>{manga.price} руб</span>
+						</p>
 						<div className={styles.buttons}>
-							<img className={styles.button} onClick={onClickFavorite} src={isFavorite ? '/icons/liked.svg' : '/icons/unliked.svg'} alt="like" />
-							<img className={styles.button} onClick={onClickPlus} src={isAdded ? '/icons/added.svg' : '/icons/not-added.svg'} alt="add" />
+							<img className={styles.button} onClick={onClickFavorite} src={manga.isFavorite ? '/icons/liked.svg' : '/icons/unliked.svg'} alt="like" />
+							<div className={styles.addButtons}>
+								{manga.inCart > 0 ? (
+									<>
+										<img className={styles.addButton} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
+										<img className={styles.minusButton} onClick={onClickMinus} src="/icons/minus.svg" alt="minus-btn" />
+										<b className={styles.count}>{manga.inCart}</b>
+									</>
+								) : (
+									<img className={styles.addButton} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
+								)}
+							</div>
 						</div>
 					</div>
 				</div>
 				<div className={styles.rightBlock}>
 					<div className={styles.title}>
 						<p className={styles.ru}>
-							<b>{title}</b>
+							<b>{manga.title}</b>
 						</p>
-						<p className={styles.en}>{title}</p>
+						<p className={styles.en}>{manga.title_en}</p>
 					</div>
 					<p>
-						<b>Автор:</b> {author}
+						<b>Автор:</b> {manga.author}
 					</p>
 					<p>
-						<b>Описание:</b> {description}
-					</p>
-					<p>
-						<b>Жанры:</b>{' '}
-						{genre.map(genre => {
+						<b>Жанры:</b>
+						{manga.genre.map(genre => {
 							return <span key={genre}> {genre} </span>
 						})}
+					</p>
+					<p>
+						<b>Описание:</b> {manga.description}
 					</p>
 					<p>
 						<b>Похожее: </b>

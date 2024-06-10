@@ -1,38 +1,39 @@
 export interface Manga {
 	id: number
 	title: string
+	title_en: string
 	author: string
 	description: string
 	genre: string[]
 	price: number
 	wrap_path: string
-	isAdded: boolean
+	inCart: number
 	isFavorite: boolean
 }
 
-export interface MangaCard {
-	id: number
-	title: string
-	price: number
-	wrap_path: string
-	isAdded: boolean
-	isFavorite: boolean
+export interface Cart {
+	cart: Manga[]
+	cartValue: number
 }
 
 export interface MangaStore {
+	userId: number
 	mangas: Manga[]
 	popular: Manga[]
-	cart: MangaCard[]
+	cart: Manga[]
 	cartValue: number
-	favorites: MangaCard[]
-	purchases: MangaCard[]
+	favorites: Manga[]
+	purchases: Manga[]
 	similarManga: Manga[]
-	getManga: () => void
-	getSimilarManga: (id: number) => void
-	addToCart: (manga: MangaCard) => void
-	removeFromCart: (id: number, price: number) => void
-	addToFavorite: (manga: MangaCard) => void
-	removeFromFavorite: (id: number) => void
+	getManga: () => Promise<void>
+	getCart: () => Promise<void>
+	getFavorites: () => Promise<void>
+	getPurchased: () => Promise<void>
+	getSimilarManga: (id: number) => Promise<void>
+	addToCart: (manga: Manga) => Promise<void>
+	removeFromCart: (id: number) => Promise<void>
+	addToFavorite: (manga: Manga) => Promise<void>
+	removeFromFavorite: (id: number) => Promise<void>
 }
 
 export interface UserStore {

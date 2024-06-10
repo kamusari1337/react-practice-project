@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { CiFaceMeh } from 'react-icons/ci'
 import { Link } from 'react-router-dom'
 import { Card } from '../components/Card'
@@ -7,6 +8,11 @@ import { useManga } from '../store'
 
 const Favorite = () => {
 	const favorites = useManga(state => state.favorites)
+	const getFavorites = useManga(state => state.getFavorites)
+
+	useEffect(() => {
+		getFavorites()
+	}, [])
 
 	return (
 		<>

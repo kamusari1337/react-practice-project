@@ -9,17 +9,7 @@ interface DrawerProps {
 const Drawer = ({ onClose }: DrawerProps) => {
 	const cartItems = useManga(state => state.cart)
 	const cartValue = useManga(state => state.cartValue)
-	const cartItemsLength = cartItems.length
-	let amountItems = ''
-	if (cartItemsLength % 10 > 1 && cartItemsLength < 5) {
-		amountItems = 'книги'
-	} else if (cartItemsLength % 10 > 4) {
-		amountItems = 'книг'
-	} else if (cartItemsLength % 10 === 1) {
-		amountItems = 'книга'
-	} else {
-		amountItems = ''
-	}
+	const cartItemsLength = cartItems?.length
 
 	return (
 		<>
@@ -30,11 +20,7 @@ const Drawer = ({ onClose }: DrawerProps) => {
 						e.stopPropagation()
 					}}
 				>
-					{cartItemsLength > 0 ? (
-						<h2 className={styles.title}>
-							Корзина: {cartItems.length} {amountItems}
-						</h2>
-					) : null}
+					{cartItemsLength > 0 ? <h2 className={styles.title}>Корзина: {cartItems.length}</h2> : null}
 					{cartItems.length > 0 ? (
 						<>
 							<div className={styles.cartList}>

@@ -12,7 +12,7 @@ interface CardProps {
 const CartItem = ({ id, wrap_path, title, price }: CardProps) => {
 	const removeFromCart = useManga(state => state.removeFromCart)
 	const onDeleteCartItem = () => {
-		removeFromCart(id, price)
+		removeFromCart(id)
 	}
 
 	return (
