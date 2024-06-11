@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Header } from '../components/Header'
 import styles from '../scss/pages/Manga.module.sass'
 import { useManga } from '../store'
@@ -80,7 +80,14 @@ function Manga() {
 					</p>
 					<p>
 						<b>Похожее: </b>
-						{similarManga.length > 0 ? similarManga.map(manga => manga.title).join(', ') : 'Ничего похожего не найдено'}
+						{similarManga.length > 0
+							? similarManga.map((manga, index) => (
+									<Link to={`/manga/${manga.id}`}>
+										<span>{manga.title}</span>
+										{index < similarManga.length - 1 && ', '}
+									</Link>
+							  ))
+							: 'Ничего похожего не найдено'}
 					</p>
 				</div>
 			</div>
