@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { HiEye, HiEyeOff } from 'react-icons/hi'
 import { IoPersonSharp } from 'react-icons/io5'
 import { RiLockPasswordFill } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
@@ -6,8 +7,14 @@ import styles from '../scss/pages/Login.module.sass'
 import { useUser } from '../store'
 
 const Login = () => {
-	const [loginValue, setLoginValue] = useState('')
-	const [passwordValue, setPasswordValue] = useState('')
+	const [form, setForm] = useState({
+		login: '',
+		password: '',
+	})
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setForm({ ...form, [e.target.name]: e.target.value })
+	}
 	const [showPassword, setShowPassword] = useState(false)
 
 	const setLogin = useUser(state => state.setLogin)
@@ -16,8 +23,8 @@ const Login = () => {
 	const getUser = useUser(state => state.getUser)
 
 	const login = () => {
-		setLogin(loginValue)
-		setPassword(passwordValue)
+		setLogin(form.login)
+		setPassword(form.password)
 		getUser()
 	}
 
@@ -33,11 +40,12 @@ const Login = () => {
 					<div className={styles.section__list}>
 						<div className={styles.section__list__field}>
 							<IoPersonSharp />
-							<input type="text" placeholder="Логин" value={loginValue} onChange={e => setLoginValue(e.target.value)} />
+							<input type="text" name="login" placeholder="Логин" value={form.login} onChange={handleChange} />
 						</div>
 						<div className={styles.section__list__field}>
-							<RiLockPasswordFill />
-							<input type={showPassword ? 'text' : 'password'} placeholder="Пароль" value={passwordValue} onChange={e => setPasswordValue(e.target.value)} onMouseEnter={() => setShowPassword(true)} onMouseLeave={() => setShowPassword(false)} />
+							<RiLockPasswordFill size={20} />
+							<input type={showPassword ? 'text' : 'password'} name="password" placeholder="Пароль" value={form.password} onChange={handleChange} />
+							{showPassword ? <HiEyeOff size={20} onClick={() => setShowPassword(false)} /> : <HiEye size={20} onClick={() => setShowPassword(true)} />}
 						</div>
 					</div>
 					<div className={styles.section__bottom}>

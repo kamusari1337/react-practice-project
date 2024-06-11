@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { HiEye, HiEyeOff } from 'react-icons/hi'
 import { IoPersonSharp } from 'react-icons/io5'
 import { MdEmail } from 'react-icons/md'
 import { RiLockPasswordFill } from 'react-icons/ri'
@@ -7,9 +8,16 @@ import { ConfirmModal } from '../components/ConfirmModal'
 import styles from '../scss/pages/Register.module.sass'
 
 const Register = () => {
-	const [loginValue, setLoginValue] = useState('')
-	const [emailValue, setEmailValue] = useState('')
-	const [passwordValue, setPasswordValue] = useState('')
+	const [form, setForm] = useState({
+		login: '',
+		email: '',
+		password: '',
+	})
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setForm({ ...form, [e.target.name]: e.target.value })
+	}
+
 	const [showPassword, setShowPassword] = useState(false)
 	const [showModal, setShowModal] = useState(false)
 
@@ -29,16 +37,17 @@ const Register = () => {
 					<div className={styles.section__title}>Регистрация</div>
 					<div className={styles.section__list}>
 						<div className={styles.section__list__field}>
-							<IoPersonSharp />
-							<input type="text" placeholder="Логин" value={loginValue} onChange={e => setLoginValue(e.target.value)} />
+							<IoPersonSharp size={20} />
+							<input type="text" name="login" placeholder="Логин" value={form.login} onChange={handleChange} />
 						</div>
 						<div className={styles.section__list__field}>
-							<MdEmail />
-							<input type="text" placeholder="Почта" value={emailValue} onChange={e => setEmailValue(e.target.value)} />
+							<MdEmail size={20} />
+							<input type="text" name="email" placeholder="Почта" value={form.email} onChange={handleChange} />
 						</div>
 						<div className={styles.section__list__field}>
-							<RiLockPasswordFill />
-							<input type={showPassword ? 'text' : 'password'} placeholder="Пароль" value={passwordValue} onChange={e => setPasswordValue(e.target.value)} onMouseEnter={() => setShowPassword(true)} onMouseLeave={() => setShowPassword(false)} />
+							<RiLockPasswordFill size={20} />
+							<input type={showPassword ? 'text' : 'password'} name="password" placeholder="Пароль" value={form.password} onChange={handleChange} />
+							{showPassword ? <HiEyeOff size={20} onClick={() => setShowPassword(false)} /> : <HiEye size={20} onClick={() => setShowPassword(true)} />}
 						</div>
 					</div>
 					<div className={styles.section__bottom}>
