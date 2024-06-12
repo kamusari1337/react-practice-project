@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { Cart, Manga, MangaStore, UserStore } from '../interfaces'
-import { addToCart, addToFavorite, auth, getCart, getFavoriteManga, getSimilar, getUserManga, getUserPopularManga, removeFromCart, removeFromFavorite } from './api'
+import { addToUserCart, addToUserFavorite, auth, getSimilar, getUserCart, getUserFavorite, getUserManga, getUserPopularManga, removeFromUserCart, removeFromUserFavorite } from './api'
 
 export const useManga = create(
 	persist<MangaStore>(
@@ -22,13 +22,13 @@ export const useManga = create(
 			},
 
 			getCart: async () => {
-				const { cart, cartValue }: Cart = await getCart(get().userId)
+				const { cart, cartValue }: Cart = await getUserCart(get().userId)
 				set({ cart: cart })
 				set({ cartValue: cartValue })
 			},
 
 			getFavorites: async () => {
-				const favorites: Manga[] = await getFavoriteManga(get().userId)
+				const favorites: Manga[] = await getUserFavorite(get().userId)
 				set({ favorites: favorites })
 			},
 
@@ -43,10 +43,12 @@ export const useManga = create(
 			},
 
 			addToCart: async (manga: Manga) => {
-				const userId = JSON.parse(localStorage.getItem('user')!).state.userId
-				await addToCart(userId, manga.id)
-				set({ cart: [...get().cart, manga] })
-				set({ cartValue: get().cartValue + manga.price })
+				// const userId = JSON.parse(localStorage.getItem('user')!).state.userId
+
+				const { cart, cartValue }: Cart = await addToUserCart(get().userId, manga.id)
+				set({ cart: cart })
+				set({ cartValue: cartValue })
+
 				set({
 					mangas: get().mangas.map(item => (item.id === manga.id ? { ...item, inCart: item.inCart + 1 } : item)),
 				})
@@ -61,13 +63,10 @@ export const useManga = create(
 			removeFromCart: async (id: number) => {
 				// const userId = JSON.parse(localStorage.getItem('user')!).state.userId
 
-				const { cart, cartValue }: Cart = await removeFromCart(get().userId, id)
+				const { cart, cartValue }: Cart = await removeFromUserCart(get().userId, id)
 				set({ cart: cart })
 				set({ cartValue: cartValue })
 
-				// const newCart = get().cart.filter(item => item.id !== id)
-				// set({ cart: newCart })
-				// set({ cartValue: get().cartValue - price })
 				set({
 					mangas: get().mangas.map(item => (item.id === id ? { ...item, inCart: item.inCart - 1 } : item)),
 				})
@@ -81,7 +80,8 @@ export const useManga = create(
 
 			addToFavorite: async (manga: Manga) => {
 				// const userId = JSON.parse(localStorage.getItem('user')!).state.userId
-				await addToFavorite(get().userId, manga.id)
+
+				await addToUserFavorite(get().userId, manga.id)
 
 				manga.isFavorite = true
 				set({ favorites: [...get().favorites, manga] })
@@ -98,7 +98,7 @@ export const useManga = create(
 			removeFromFavorite: async (id: number) => {
 				// const userId = JSON.parse(localStorage.getItem('user')!).state.userId
 
-				await removeFromFavorite(get().userId, id)
+				await removeFromUserFavorite(get().userId, id)
 				const newFavorites = get().favorites.filter(item => item.id !== id)
 				set({ favorites: newFavorites })
 				set({
