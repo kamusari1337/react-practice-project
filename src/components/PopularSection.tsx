@@ -9,8 +9,8 @@ const PopularSection = () => {
 		<div className={styles.section}>
 			<p className={styles.section__title}>Популярное</p>
 			<div className={styles.section__list}>
-				{popular.map(manga => (
-					<Card key={manga.id} {...manga} />
+				{popular.map(item => (
+					<Card key={'popular' + item.id} {...item} />
 				))}
 			</div>
 		</div>

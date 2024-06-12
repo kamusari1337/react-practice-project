@@ -24,8 +24,8 @@ const Drawer = ({ onClose }: DrawerProps) => {
 					{cartItems.length > 0 ? (
 						<>
 							<div className={styles.drawer__cartList}>
-								{cartItems.map(card => (
-									<CartItem key={card.id} id={card.id} wrap_path={card.wrap_path} title={card.title} price={card.price} />
+								{cartItems.map(item => (
+									<CartItem key={'cart' + item.id} {...item} />
 								))}
 							</div>
 							<div className={styles.drawer__totalBlock}>

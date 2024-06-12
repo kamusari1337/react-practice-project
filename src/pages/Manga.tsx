@@ -85,11 +85,11 @@ function Manga() {
 						<b>Похожее: </b>
 						{similarManga.length > 0
 							? similarManga.map((item, index) => (
-									<Link to={`/manga/${manga.id}`}>
+									<Link to={`/manga/${item.id}`}>
 										<span className={styles.section__rightBlock__similar}>{item.title}</span>
 										{index < similarManga.length - 1 && ', '}
 									</Link>
-							))
+							  ))
 							: 'Ничего похожего не найдено'}
 					</p>
 				</div>
