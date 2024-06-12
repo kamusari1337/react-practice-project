@@ -44,12 +44,12 @@ export const getUserPopularManga = async <Manga>(id: number) => {
 	return response.data
 }
 
-export const getCart = async <Cart>(id: number) => {
+export const getUserCart = async <Cart>(id: number) => {
 	const response = await API.get<Cart>(`/users/${id}/cart`)
 	return response.data
 }
 
-export const getFavoriteManga = async <Manga>(id: number) => {
+export const getUserFavorite = async <Manga>(id: number) => {
 	const response = await API.get<Manga>(`/users/${id}/favorite`)
 	return response.data
 }
@@ -59,14 +59,14 @@ export const getSimilar = async <Manga>(id: number) => {
 	return response.data
 }
 
-export const addToCart = async <Cart>(id: number, mangaId: number) => {
+export const addToUserCart = async <Cart>(id: number, mangaId: number) => {
 	const response = await API.post<Cart>(`/users/${id}/cart`, {
 		manga_id: mangaId,
 	})
 	return response.data
 }
 
-export const removeFromCart = async <Cart>(id: number, mangaId: number) => {
+export const removeFromUserCart = async <Cart>(id: number, mangaId: number) => {
 	const response = await API.delete<Cart>(`/users/${id}/cart`, {
 		data: {
 			manga_id: mangaId,
@@ -75,13 +75,13 @@ export const removeFromCart = async <Cart>(id: number, mangaId: number) => {
 	return response.data
 }
 
-export const addToFavorite = async (id: number, mangaId: number) => {
+export const addToUserFavorite = async (id: number, mangaId: number) => {
 	await API.post<number>(`/users/${id}/favorite`, {
 		manga_id: mangaId,
 	})
 }
 
-export const removeFromFavorite = async (id: number, mangaId: number) => {
+export const removeFromUserFavorite = async (id: number, mangaId: number) => {
 	await API.delete<number>(`/users/${id}/favorite`, {
 		data: {
 			manga_id: mangaId,
