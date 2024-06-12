@@ -44,18 +44,16 @@ function Manga() {
 							Цена: <span>{manga.price} руб</span>
 						</p>
 						<div className={styles.section__leftBlock__actions__buttons}>
-							<img onClick={onClickFavorite} src={manga.isFavorite ? '/icons/liked.svg' : '/icons/unliked.svg'} alt="like" />
-							<div className={styles.section__leftBlock__actions__buttons__modifyButtons}>
-								{manga.inCart > 0 ? (
-									<>
-										<img onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
-										<img onClick={onClickMinus} src="/icons/minus.svg" alt="minus-btn" />
-										<b className={styles.section__leftBlock__actions__buttons__modifyButtons__count}>{manga.inCart}</b>
-									</>
-								) : (
-									<img className={styles.addButton} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
-								)}
-							</div>
+							<img className={styles.section__leftBlock__actions__button} onClick={onClickFavorite} src={manga.isFavorite ? '/icons/liked.svg' : '/icons/unliked.svg'} alt="like" />
+							{manga.inCart > 0 ? (
+								<>
+									<img className={styles.section__leftBlock__actions__button} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
+									<img className={styles.section__leftBlock__actions__button} onClick={onClickMinus} src="/icons/minus.svg" alt="minus-btn" />
+									<b className={styles.section__leftBlock__actions__count}>{manga.inCart}</b>
+								</>
+							) : (
+								<img className={styles.section__leftBlock__actions__button} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
+							)}
 						</div>
 					</div>
 				</div>
@@ -70,9 +68,14 @@ function Manga() {
 						<b>Автор:</b> {manga.author}
 					</p>
 					<p>
-						<b>Жанры:</b>
-						{manga.genre.map(genre => {
-							return <span key={genre}> {genre} </span>
+						<b>Жанры: </b>
+						{manga.genre.map((item, index) => {
+							return (
+								<span className={styles.section__rightBlock__genre} key={item}>
+									{item}
+									{index < manga.genre.length - 1 && ', '}
+								</span>
+							)
 						})}
 					</p>
 					<p>
@@ -81,12 +84,12 @@ function Manga() {
 					<p>
 						<b>Похожее: </b>
 						{similarManga.length > 0
-							? similarManga.map((manga, index) => (
+							? similarManga.map((item, index) => (
 									<Link to={`/manga/${manga.id}`}>
-										<span>{manga.title}</span>
+										<span className={styles.section__rightBlock__similar}>{item.title}</span>
 										{index < similarManga.length - 1 && ', '}
 									</Link>
-							  ))
+							))
 							: 'Ничего похожего не найдено'}
 					</p>
 				</div>
