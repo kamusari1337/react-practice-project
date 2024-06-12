@@ -47,7 +47,7 @@ const Register = () => {
 						<div className={styles.section__list__field}>
 							<RiLockPasswordFill size={20} />
 							<input type={showPassword ? 'text' : 'password'} name="password" placeholder="Пароль" value={form.password} onChange={handleChange} />
-							{showPassword ? <HiEyeOff size={20} onClick={() => setShowPassword(false)} /> : <HiEye size={20} onClick={() => setShowPassword(true)} />}
+							{showPassword ? <HiEyeOff className={styles.field__eye} size={20} onClick={() => setShowPassword(false)} /> : <HiEye className={styles.field__eye} size={20} onClick={() => setShowPassword(true)} />}
 						</div>
 					</div>
 					<div className={styles.section__bottom}>
