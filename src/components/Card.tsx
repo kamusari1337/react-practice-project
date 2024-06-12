@@ -40,16 +40,16 @@ const Card = ({ id }: CardProps) => {
 						<p>{manga.price} руб.</p>
 					</div>
 					<div className={styles.card__bottomLine__right}>
-						<img onClick={onClickFavorite} src={manga.isFavorite ? '/icons/liked.svg' : '/icons/unliked.svg'} alt="like-btn" />
+						<img className={styles.card_bottomLine__right_button} onClick={onClickFavorite} src={manga.isFavorite ? '/icons/liked.svg' : '/icons/unliked.svg'} alt="like-btn" />
 						<div className={styles.card__bottomLine__right_addButtons}>
 							{manga.inCart > 0 ? (
 								<>
-									<img onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
-									<img onClick={onClickMinus} src="/icons/minus.svg" alt="minus-btn" />
-									<b className={styles.card__bottomLine__right_addButtons_count}>{manga.inCart}</b>
+									<img className={styles.card_bottomLine__right_button} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
+									<img className={styles.card_bottomLine__right_button} onClick={onClickMinus} src="/icons/minus.svg" alt="minus-btn" />
+									<b className={styles.card__bottomLine__right_button_count}>{manga.inCart}</b>
 								</>
 							) : (
-								<img className={styles.addButton} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
+								<img className={styles.card_bottomLine__right_button} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
 							)}
 						</div>
 					</div>
