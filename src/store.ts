@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { Cart, Manga, MangaStore, UserStore } from '../interfaces'
-import { addToUserCart, addToUserFavorite, auth, getSimilar, getUserCart, getUserFavorite, getUserManga, getUserPopularManga, removeFromUserCart, removeFromUserFavorite } from './api'
+import { addToUserCart, addToUserFavorite, auth, getSimilar, getUserCart, getUserFavorite, getUserManga, getUserPopularManga, removeAllFromUserCart, removeFromUserCart, removeFromUserFavorite } from './api'
 
 export const useManga = create(
 	persist<MangaStore>(
@@ -63,6 +63,22 @@ export const useManga = create(
 			removeFromCart: async (id: number) => {
 				// const userId = JSON.parse(localStorage.getItem('user')!).state.userId
 
+				const { cart, cartValue }: Cart = await removeAllFromUserCart(get().userId, id)
+				set({ cart: cart })
+				set({ cartValue: cartValue })
+
+				set({
+					mangas: get().mangas.map(item => (item.id === id ? { ...item, inCart: 0 } : item)),
+				})
+				set({
+					popular: get().popular.map(item => (item.id === id ? { ...item, inCart: 0 } : item)),
+				})
+				set({
+					favorites: get().favorites.map(item => (item.id === id ? { ...item, inCart: 0 } : item)),
+				})
+			},
+
+			removeAllFromCart: async (id: number) => {
 				const { cart, cartValue }: Cart = await removeFromUserCart(get().userId, id)
 				set({ cart: cart })
 				set({ cartValue: cartValue })

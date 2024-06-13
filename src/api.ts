@@ -75,6 +75,15 @@ export const removeFromUserCart = async <Cart>(id: number, mangaId: number) => {
 	return response.data
 }
 
+export const removeAllFromUserCart = async <Cart>(id: number, mangaId: number) => {
+	const response = await API.delete<Cart>(`/users/${id}/cart/all`, {
+		data: {
+			manga_id: mangaId,
+		},
+	})
+	return response.data
+}
+
 export const addToUserFavorite = async (id: number, mangaId: number) => {
 	await API.post<number>(`/users/${id}/favorite`, {
 		manga_id: mangaId,

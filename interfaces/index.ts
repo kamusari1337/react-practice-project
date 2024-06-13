@@ -32,6 +32,7 @@ export interface MangaStore {
 	getSimilarManga: (id: number) => Promise<void>
 	addToCart: (manga: Manga) => Promise<void>
 	removeFromCart: (id: number) => Promise<void>
+	removeAllFromCart: (id: number) => Promise<void>
 	addToFavorite: (manga: Manga) => Promise<void>
 	removeFromFavorite: (id: number) => Promise<void>
 }
