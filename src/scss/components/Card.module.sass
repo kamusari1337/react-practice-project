@@ -1,14 +1,13 @@
 @import ../_base
 
 .card
-	padding: 13px
 	font-size: 12px
-	border: $card-border
 	border-radius: $card-border-radius
+	border: $card-border
 	transition: $card-hover-transition
 	cursor: pointer
 	p
-		font-weight: 600
+		font-weight: 400
 	&:hover
 		box-shadow: $card-box-shadow
 		transform: translateY(-5px)
@@ -17,40 +16,42 @@
 		width: $card-cover-width
 		height: $card-cover-height
 		object-fit: cover
-		border-radius: $card-border-radius
-	.card__title
-		max-width: $card-cover-width
-		margin: 10px 0
-		font-size: 14px
-		overflow: hidden
-		white-space: nowrap
-		text-overflow: ellipsis
-	.card__bottomLine
-		display: flex
-		justify-content: space-between
-		.card__bottomLine__left
-			p
-				margin: 0
-		.card__bottomLine__right
+		border-radius: $cover-border-radius
+	.cart__info
+		padding: 13px
+		.card__title
+			max-width: calc( $card-cover-width - 26px )
+			margin: 10px 0
+			font-size: 14px
+			overflow: hidden
+			white-space: nowrap
+			text-overflow: ellipsis
+		.card__bottomLine
 			display: flex
-			align-items: center
-			column-gap: 4px
-			display: flex
-			.card__bottomLine__right_addButtons
+			justify-content: space-between
+			.card__bottomLine__left
+				p
+					margin: 0
+			.card__bottomLine__right
 				display: flex
 				align-items: center
 				column-gap: 4px
-			.card_bottomLine__right_button:hover
-				opacity: 0.5
-				transition: all .1s ease-in
-
-			.card__bottomLine__right_button_count
 				display: flex
-				align-items: center
-				justify-content: center
-				width: 32px
-				height: 32px
-				color: $white
-				background-color: $black
-				font-size: 16px
-				border-radius: $card-border-radius
+				.card__bottomLine__right_addButtons
+					display: flex
+					align-items: center
+					column-gap: 4px
+				.card_bottomLine__right_button:hover
+					opacity: 0.5
+					transition: all .1s ease-in
+
+				.card__bottomLine__right_button_count
+					display: flex
+					align-items: center
+					justify-content: center
+					width: 32px
+					height: 32px
+					color: $white
+					background: $gradient
+					font-size: 16px
+					border-radius: $card-border-radius
