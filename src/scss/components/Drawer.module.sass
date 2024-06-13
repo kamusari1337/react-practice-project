@@ -12,7 +12,7 @@
 		display: flex
 		flex-direction: column
 		position: absolute
-		width: 350px
+		width: 400px
 		height: 100%
 		right: 0
 		color: $black
@@ -35,11 +35,10 @@
 			display: flex
 			align-items: flex-end
 			div
-				flex: 1
 				height: 1px
-				border-bottom: 1px dashed $black
-
 				margin: 0 7px
+				border-bottom: 1px dashed $black
+				flex: 1
 		.drawer__button
 			text-align: center
 			margin: 20px 0px
@@ -54,3 +53,7 @@
 			margin: auto 0
 			font-size: 18px
 			color: $black
+			.drawer__empty__header
+				font-size: 24px
+				margin: 20px 0
+				font-weight: 400

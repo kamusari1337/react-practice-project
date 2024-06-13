@@ -2,16 +2,20 @@
 
 .card
 	display: flex
-	padding: 15px
-	object-fit: cover
 	border: $card-border
 	border-radius: $card-border-radius
-	img
-		border-radius: $card-border-radius
+	color: $black
+	a
+		height: $cart-cover-height
+	.card__cover
+		width: $cart-cover-width
+		height: $cart-cover-height
+		object-fit: cover
+		border-radius: $cart-cover-border-radius
 	.card__info
 		display: flex
 		flex-direction: column
-		margin-left: 20px
+		padding: 15px
 		width: 100%
 		.card__info__header
 			overflow: hidden
@@ -22,3 +26,21 @@
 			margin-top: auto
 			img
 				cursor: pointer
+			.card__buttons
+				display: flex
+				align-items: center
+				justify-content: center
+				column-gap: 4px
+				.card__buttons__count
+					display: flex
+					align-items: center
+					justify-content: center
+					width: 32px
+					height: 32px
+					color: #D783FF
+					font-size: 16px
+					border-radius: $card-border-radius
+					border: double 1px transparent
+					background-image: linear-gradient($white, $white), linear-gradient(45deg, #BE9558 0%, #D783FF 100%)
+					background-origin: border-box
+					background-clip: padding-box, border-box

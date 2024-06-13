@@ -40,7 +40,7 @@ const Drawer = ({ onClose }: DrawerProps) => {
 					) : (
 						<div className={styles.drawer__empty}>
 							<img src="/icons/empty-cart.png" alt="empty-cart" />
-							<h2>Ваша корзина пуста</h2>
+							<p className={styles.drawer__empty__header}>Ваша корзина пуста</p>
 							<p>Добавьте хотя бы одну книгу</p>
 						</div>
 					)}
