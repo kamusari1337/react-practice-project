@@ -2,9 +2,9 @@
 
 .card
 	display: flex
+	border-radius: $btn-border-radius
+	color: $accent
 	border: $card-border
-	border-radius: $card-border-radius
-	color: $black
 	a
 		height: $cart-cover-height
 	.card__cover
@@ -21,26 +21,32 @@
 			overflow: hidden
 		.card__info__bottom
 			display: flex
-			align-items: center
-			justify-content: space-between
+			flex-direction: column
+			align-items: left
 			margin-top: auto
 			img
 				cursor: pointer
-			.card__buttons
+			.card__total_price
+				font-size: 18px
+			.card__info__buttons
 				display: flex
-				align-items: center
-				justify-content: center
-				column-gap: 4px
-				.card__buttons__count
+				column-gap: 5px
+				.card__price
+					display: flex
+					justify-content: center
+					align-items: center
+					font-size: 16px
+				.card__buttons
 					display: flex
 					align-items: center
 					justify-content: center
-					width: 32px
-					height: 32px
-					color: #D783FF
-					font-size: 16px
-					border-radius: $card-border-radius
-					border: double 1px transparent
-					background-image: linear-gradient($white, $white), linear-gradient(45deg, #BE9558 0%, #D783FF 100%)
-					background-origin: border-box
-					background-clip: padding-box, border-box
+					column-gap: 4px
+					.card__buttons__count
+						display: flex
+						align-items: center
+						justify-content: center
+						width: 30px
+						height: 30px
+						font-size: 16px
+						border: $card-border
+						border-radius: $card-border-radius

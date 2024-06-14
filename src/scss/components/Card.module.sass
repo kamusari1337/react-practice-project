@@ -1,13 +1,16 @@
 @import ../_base
 
 .card
-	font-size: 12px
-	border-radius: $card-border-radius
-	border: $card-border
 	transition: $card-hover-transition
+
+	border: $card-border
+	border-radius: $card-border-radius
+
+	font-size: 14px
+	font-weight: 500
+	color: $accent
+
 	cursor: pointer
-	p
-		font-weight: 400
 	&:hover
 		box-shadow: $card-box-shadow
 		transform: translateY(-5px)
@@ -18,40 +21,35 @@
 		object-fit: cover
 		border-radius: $cover-border-radius
 	.cart__info
-		padding: 13px
+		padding: 10px
 		.card__title
 			max-width: calc( $card-cover-width - 26px )
 			margin: 10px 0
-			font-size: 14px
 			overflow: hidden
 			white-space: nowrap
 			text-overflow: ellipsis
 		.card__bottomLine
 			display: flex
 			justify-content: space-between
-			.card__bottomLine__left
+			.bottomLine__left
 				p
 					margin: 0
-			.card__bottomLine__right
+			.bottomLine__right
 				display: flex
 				align-items: center
 				column-gap: 4px
 				display: flex
-				.card__bottomLine__right_addButtons
+				.card__addButtons
 					display: flex
 					align-items: center
 					column-gap: 4px
-				.card_bottomLine__right_button:hover
-					opacity: 0.5
-					transition: all .1s ease-in
-
-				.card__bottomLine__right_button_count
-					display: flex
-					align-items: center
-					justify-content: center
-					width: 32px
-					height: 32px
-					color: $white
-					background: $gradient
-					font-size: 16px
-					border-radius: $card-border-radius
+					.card__amount
+						display: flex
+						align-items: center
+						justify-content: center
+						width: 32px
+						height: 32px
+						font-size: 16px
+						color: $white
+						background: $accent
+						border-radius: $card-border-radius

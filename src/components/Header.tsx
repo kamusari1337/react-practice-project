@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import { BsCart2 } from 'react-icons/bs'
-import { FaRegHeart, FaRegUserCircle } from 'react-icons/fa'
-import { IoMdExit } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import styles from '../scss/components/Header.module.sass'
 import { useManga } from '../store'
 import { Drawer } from './Drawer'
+import { BookLogo, CartIcon, ExitIcon, HeartIcon, UserIcon } from './UI/icons/Icons'
 
 const Header = () => {
 	const cartValue = useManga(state => state.cartValue)
@@ -17,28 +15,28 @@ const Header = () => {
 			<div className={styles.header}>
 				<Link to={'/'} className={styles.header__title}>
 					<p>Mangify</p>
-					<img width={40} src="/icons/book.svg" alt="" />
+					<BookLogo />
 				</Link>
 				<ul className={styles.header__list}>
 					<li className={styles.header__list__button} onClick={() => setCartOpened(value => !value)}>
-						<BsCart2 size={18} className="icon" />
+						<CartIcon />
 						<p>{cartValue} руб.</p>
 					</li>
 					<li>
 						<Link to={'/favorites'} className={styles.header__list__button}>
-							<FaRegHeart size={18} className="icon" />
+							<HeartIcon />
 							<p>Закладки</p>
 						</Link>
 					</li>
 					<li>
 						<Link to={'/profile'} className={styles.header__list__button}>
-							<FaRegUserCircle size={18} className="icon" />
+							<UserIcon />
 							<p>Профиль</p>
 						</Link>
 					</li>
 					<li>
 						<Link to={'/login'} className={styles.header__list__button}>
-							<IoMdExit />
+							<ExitIcon />
 							<p>Выход</p>
 						</Link>
 					</li>

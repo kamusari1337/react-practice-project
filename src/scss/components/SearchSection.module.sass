@@ -7,7 +7,6 @@
 	padding: $section-padding
 
 	border-radius: $section-border-radius
-	color: $black
 	background-color: $white
 	.section__header
 		display: flex
@@ -16,6 +15,7 @@
 		padding-bottom: 20px
 		.section__header__title
 			font-size: 24px
+			font-weight: 500
 		.section__header__search
 			display: flex
 			align-items: center
@@ -25,25 +25,24 @@
 			align-items: center
 			position: relative
 			column-gap: 10px
+
 			padding: 10px
+
 			border: $input-border
 			border-radius: $input-border-radius
+
 			cursor: pointer
-			input
-				all: unset
-				color: $black
-			input::placeholder
-				color: $black
+			path
+				fill: $accent
 			.section__header__search_input_mark
 				position: absolute
 				top: 10px
 				right: 15px
-				width: 20px
 	.section__list
 		display: flex
 		flex-wrap: wrap
-		row-gap: 20px
-		column-gap: 52px
+		row-gap: $list-row-gap
+		column-gap: $list-col-gap
 		.section__list__notFound
 			font-size: 20px
 			margin: 200px auto

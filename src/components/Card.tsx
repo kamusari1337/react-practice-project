@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import styles from '../scss/components/Card.module.sass'
 import { useManga } from '../store'
+import { Like, LikeFilled, MinusFilled, Plus, PlusFilled } from './UI/Buttons'
 
 interface CardProps {
 	id: number
@@ -36,21 +37,21 @@ const Card = ({ id }: CardProps) => {
 				<div className={styles.cart__info}>
 					<p className={styles.card__title}>{manga.title}</p>
 					<div className={styles.card__bottomLine}>
-						<div className={styles.card__bottomLine__left}>
+						<div className={styles.bottomLine__left}>
 							<p>Цена:</p>
 							<p>{manga.price} руб.</p>
 						</div>
-						<div className={styles.card__bottomLine__right}>
-							<img className={styles.card_bottomLine__right_button} onClick={onClickFavorite} src={manga.isFavorite ? '/icons/liked.svg' : '/icons/unliked.svg'} alt="like-btn" />
-							<div className={styles.card__bottomLine__right_addButtons}>
+						<div className={styles.bottomLine__right}>
+							{manga.isFavorite ? <LikeFilled onClick={onClickFavorite} /> : <Like onClick={onClickFavorite} />}
+							<div className={styles.card__addButtons}>
 								{manga.inCart > 0 ? (
 									<>
-										<img className={styles.card_bottomLine__right_button} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
-										<img className={styles.card_bottomLine__right_button} onClick={onClickMinus} src="/icons/minus.svg" alt="minus-btn" />
-										<b className={styles.card__bottomLine__right_button_count}>{manga.inCart}</b>
+										<MinusFilled onClick={onClickMinus} />
+										<b className={styles.card__amount}>{manga.inCart}</b>
+										<PlusFilled onClick={onClickPlus} />
 									</>
 								) : (
-									<img className={styles.card_bottomLine__right_button} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
+									<Plus onClick={onClickPlus} />
 								)}
 							</div>
 						</div>

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Header } from '../components/Header'
+import { Like, LikeFilled, MinusFilled, Plus, PlusFilled } from '../components/UI/Buttons'
 import styles from '../scss/pages/Manga.module.sass'
 import { useManga } from '../store'
 
@@ -37,32 +38,32 @@ function Manga() {
 		<>
 			<Header></Header>
 			<div className={styles.section}>
-				<div className={styles.section__leftBlock}>
-					<img className={styles.section__leftBlock__cover} src={manga.wrap_path} alt="manga-cover" />
-					<div className={styles.section__leftBlock__actions}>
-						<p className={styles.section__leftBlock__actions__price}>
+				<div className={styles.section__left}>
+					<img className={styles.section__left__cover} src={manga.wrap_path} alt="manga-cover" />
+					<div className={styles.section__left__actions}>
+						<p className={styles.section__left__actions__price}>
 							Цена: <span>{manga.price} руб</span>
 						</p>
-						<div className={styles.section__leftBlock__actions__buttons}>
-							<img className={styles.section__leftBlock__actions__button} onClick={onClickFavorite} src={manga.isFavorite ? '/icons/liked.svg' : '/icons/unliked.svg'} alt="like" />
+						<div className={styles.section__left__actions__buttons}>
+							{manga.isFavorite ? <LikeFilled onClick={onClickFavorite} /> : <Like onClick={onClickFavorite} />}
 							{manga.inCart > 0 ? (
 								<>
-									<img className={styles.section__leftBlock__actions__button} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
-									<img className={styles.section__leftBlock__actions__button} onClick={onClickMinus} src="/icons/minus.svg" alt="minus-btn" />
-									<b className={styles.section__leftBlock__actions__count}>{manga.inCart}</b>
+									<PlusFilled onClick={onClickPlus} />
+									<MinusFilled onClick={onClickMinus} />
+									<b className={styles.section__left__actions__count}>{manga.inCart}</b>
 								</>
 							) : (
-								<img className={styles.section__leftBlock__actions__button} onClick={onClickPlus} src={manga.inCart > 0 ? '/icons/plus.svg' : '/icons/not-added.svg'} alt="plus-btn" />
+								<Plus onClick={onClickPlus} />
 							)}
 						</div>
 					</div>
 				</div>
-				<div className={styles.section__rightBlock}>
-					<div className={styles.section__rightBlock__title}>
-						<p className={styles.section__rightBlock__title__ru}>
+				<div className={styles.section__right}>
+					<div className={styles.section__right__title}>
+						<p className={styles.section__right__title__ru}>
 							<b>{manga.title}</b>
 						</p>
-						<p className={styles.section__rightBlock__title__en}>{manga.title_en}</p>
+						<p className={styles.section__right__title__en}>{manga.title_en}</p>
 					</div>
 					<p>
 						<b>Автор:</b> {manga.author}
@@ -71,7 +72,7 @@ function Manga() {
 						<b>Жанры: </b>
 						{manga.genre.map((item, index) => {
 							return (
-								<span className={styles.section__rightBlock__genre} key={item}>
+								<span className={styles.section__right__genre} key={`genre${item}`}>
 									{item}
 									{index < manga.genre.length - 1 && ', '}
 								</span>
@@ -85,8 +86,8 @@ function Manga() {
 						<b>Похожее: </b>
 						{similarManga.length > 0
 							? similarManga.map((item, index) => (
-									<Link to={`/manga/${item.id}`}>
-										<span className={styles.section__rightBlock__similar}>{item.title}</span>
+									<Link to={`/manga/${item.id}`} key={`similar${index}`}>
+										<span className={styles.section__right__similar}>{item.title}</span>
 										{index < similarManga.length - 1 && ', '}
 									</Link>
 							  ))

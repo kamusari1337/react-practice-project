@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import styles from '../scss/components/CartItem.module.sass'
 import { useManga } from '../store'
+import { Mark, Minus, Plus } from './UI/Buttons'
 
 interface CardProps {
 	id: number
@@ -32,20 +33,20 @@ const CartItem = ({ id }: CardProps) => {
 				</Link>
 				<div className={styles.card__info}>
 					<div className={styles.card__info__header}>
-						<p>{manga.title}</p>
+						<b>{manga.title}</b>
 					</div>
 					<div className={styles.card__info__bottom}>
-						<div className={styles.card__info__price}>
-							<b>{manga.price * manga.inCart} руб.</b>
-							<p>
-								{manga.price} руб. * {manga.inCart}
-							</p>
-						</div>
-						<div className={styles.card__buttons}>
-							<img onClick={increaseCartItem} src="/icons/not-added.svg" alt="increase" />
-							<p className={styles.card__buttons__count}>{manga.inCart}</p>
-							<img onClick={decreaseCartItem} src="/icons/cart-minus.svg" alt="decrease" />
-							<img onClick={deleteCartItem} src="/icons/mark.svg" alt="delete" />
+						<b className={styles.card__total_price}>{manga.price * manga.inCart} руб.</b>
+						<div className={styles.card__info__buttons}>
+							<div className={styles.card__price}>
+								<p>{manga.price} руб. *</p>
+							</div>
+							<div className={styles.card__buttons}>
+								<span className={styles.card__buttons__count}>{manga.inCart}</span>
+								<Plus onClick={increaseCartItem} />
+								<Minus onClick={decreaseCartItem} />
+								<Mark onClick={deleteCartItem} />
+							</div>
 						</div>
 					</div>
 				</div>
