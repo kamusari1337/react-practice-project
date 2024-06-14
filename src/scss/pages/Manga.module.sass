@@ -10,19 +10,23 @@
 	margin: 0 auto
 	padding: $section-padding
 
-	color: $black
+	color: $accent
 	background-color: $white
 	border-radius: $section-border-radius
-	.section__leftBlock
+	font-weight: 400
+	b
+		font-weight: 500
+	.section__left
 		display: flex
 		flex-direction: column
 
-		border: 1px solid $outline
+		border: $card-border
 		border-radius: $card-border-radius
-		.section__leftBlock__cover
+		.section__left__cover
 			border-radius: $cover-border-radius
-			width: 300px
-		.section__leftBlock__actions
+			width: $page-cover-width
+			height: $page-cover-height
+		.section__left__actions
 			display: flex
 			justify-content: space-between
 			align-items: center
@@ -31,50 +35,49 @@
 
 			padding: 10px
 
-			.section__leftBlock__actions__price
+			.section__left__actions__price
 				display: flex
 				flex-direction: column
 				font-size: 20px
-			.section__leftBlock__actions__buttons
+			.section__left__actions__buttons
 				display: flex
 				align-items: center
 				column-gap: 4px
 				display: flex
-				img
+				svg
 					width: 40px
-					cursor: pointer
-				.section__leftBlock__actions__button:hover
-					opacity: 0.5
-				.section__leftBlock__actions__count
+					height: 40px
+				.section__left__actions__count
 					display: flex
 					align-items: center
 					justify-content: center
 
 					width: 40px
-					height: px
-					font-size: 16px
+					height: 40px
 
-					border-radius: $card-border-radius
 					color: $white
-					background: $gradient
-	.section__rightBlock
+					font-size: 16px
+					background: $accent
+					border-radius: $card-border-radius
+
+	.section__right
 		display: flex
 		flex-direction: column
 		row-gap: 20px
 
-		border: 1px solid $outline
+		border: $card-border
 		border-radius: $card-border-radius
 		padding: 10px
 		p
 			font-size: 20px
-		.section__rightBlock__title
+		.section__right__title
 			display: flex
 			flex-direction: column
 			row-gap: 10px
 			text-align: left
-			.section__rightBlock__title__ru
+			.section__right__title__ru
 				font-size: 40px
-			.section__rightBlock__title__en
+			.section__right__title__en
 				font-size: 24px
-		.section__rightBlock__similar:hover
+		.section__right__similar:hover
 			opacity: 0.5
