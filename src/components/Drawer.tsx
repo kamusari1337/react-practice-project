@@ -31,7 +31,7 @@ const Drawer = ({ onClose }: DrawerProps) => {
 							<div className={styles.drawer__totalBlock}>
 								<span>Итого:</span>
 								<div></div>
-								<b>{cartValue} руб.</b>
+								<span>{cartValue} руб.</span>
 							</div>
 							<div className={styles.drawer__button}>
 								<a>Оформить заказ</a>
