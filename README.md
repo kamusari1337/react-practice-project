@@ -5,7 +5,6 @@
 -   TypeScript
 -   React
 -   React Router DOM
--   React Icons
 -   SASS
 -   axios
 -   zustand
