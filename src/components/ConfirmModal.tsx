@@ -1,4 +1,3 @@
-import { GrSecure } from 'react-icons/gr'
 import styles from '../scss/components/ConfirmModal.module.sass'
 interface ModalProps {
 	setModal: () => void
@@ -16,7 +15,6 @@ const ConfirmModal = ({ setModal }: ModalProps) => {
 				>
 					<div className={styles.modal__title}>Вам на почту отправлен код с подтверждением</div>
 					<div className={styles.modal__input}>
-						<GrSecure />
 						<input placeholder="Код"></input>
 					</div>
 					<div className={styles.modal__button}>Подтвердить</div>
