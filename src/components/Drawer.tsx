@@ -1,25 +1,25 @@
+import { useState } from 'react'
 import styles from '../scss/components/Drawer.module.sass'
 import { useManga } from '../store'
 import { CartItem } from './CartItem'
+import { PayModal } from './PayModal'
 
 interface DrawerProps {
 	onClose: () => void
 }
 
 const Drawer = ({ onClose }: DrawerProps) => {
+	const [modalOpened, setModalOpened] = useState(false)
+
 	const cartItems = useManga(state => state.cart)
 	const cartValue = useManga(state => state.cartValue)
 	const cartItemsLength = cartItems?.length
 
 	return (
 		<>
-			<div className={styles.overlay} onClick={onClose}>
-				<div
-					className={styles.drawer}
-					onClick={e => {
-						e.stopPropagation()
-					}}
-				>
+			{modalOpened && <PayModal onClose={() => setModalOpened(false)} />}
+			<div className={styles.overlay} onClick={() => (!modalOpened ? onClose() : null)}>
+				<div className={styles.drawer} onClick={e => e.stopPropagation()}>
 					{cartItemsLength > 0 ? <h2 className={styles.title}>Корзина: {cartItems.length}</h2> : null}
 					{cartItems.length > 0 ? (
 						<>
@@ -34,7 +34,7 @@ const Drawer = ({ onClose }: DrawerProps) => {
 								<span>{cartValue} руб.</span>
 							</div>
 							<div className={styles.drawer__button}>
-								<a>Оформить заказ</a>
+								<p onClick={() => setModalOpened(true)}>Оформить заказ</p>
 							</div>
 						</>
 					) : (
