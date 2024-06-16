@@ -13,7 +13,7 @@ export interface Manga {
 
 export interface Cart {
 	cart: Manga[]
-	cartValue: number
+	amount_of_buying: number
 }
 
 export interface MangaStore {
