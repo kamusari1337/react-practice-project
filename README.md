@@ -2,40 +2,40 @@
 
 ## Technologies
 
--   TypeScript
--   React
--   React Router DOM
--   SASS
--   axios
--   zustand
--   Vite
+- TypeScript
+- React
+- React Router DOM
+- SASS
+- axios
+- zustand
+- Vite
 
 ## Run frontend
 
 1. Installation dependencies.
 
-    For npm:
+   For npm:
 
-    ```shell
-    npm install
-    ```
+   ```shell
+   npm install
+   ```
 
-    For yarn:
+   For yarn:
 
-    ```shell
-    yarn install
-    ```
+   ```shell
+   yarn install
+   ```
 
 2. Start app
 
-    For npm:
+   For npm:
 
-    ```shell
-    npm run preview
-    ```
+   ```shell
+   npm run preview
+   ```
 
-    For yarn:
+   For yarn:
 
-    ```shell
-    yarn run preview
-    ```
+   ```shell
+   yarn run preview
+   ```
