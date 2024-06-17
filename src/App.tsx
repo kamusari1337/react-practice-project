@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import { Favorite } from './pages/Favorite.tsx'
 import { Home } from './pages/Home.tsx'
 import { Login } from './pages/Login.tsx'
@@ -11,15 +11,24 @@ import { useManga, useUser } from './store.js'
 const App = () => {
 	const getManga = useManga(state => state.getManga)
 	const getCart = useManga(state => state.getCart)
-	const getUser = useUser(state => state.getUser)
+	const setUser = useManga(state => state.setUser)
+	const isAuth = useUser(state => state.isAuth)
+	const navigate = useNavigate()
 
 	useEffect(() => {
-		getUser()
-		getManga()
-		getCart()
-	}, [])
+		isAuth ? navigate('/') : navigate('/login')
+	}, [isAuth])
 
-	useEffect(() => {}, [])
+	useEffect(() => {
+		if (isAuth) {
+			navigate('/')
+			setUser()
+			getManga()
+			getCart()
+		} else {
+			navigate('/login')
+		}
+	}, [])
 
 	return (
 		<>

@@ -1,11 +1,27 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { BookLogo } from '../components/UI/icons/Icons'
 import styles from '../scss/pages/Login.module.sass'
 import { useUser } from '../store'
 
 const Login = () => {
+	const isAuth = useUser(state => state.isAuth)
+	const setLogin = useUser(state => state.setLogin)
+	const setPassword = useUser(state => state.setPassword)
+	const getUser = useUser(state => state.getUser)
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		if (isAuth) {
+			navigate('/')
+		}
+	}, [isAuth])
+
 	const [form, setForm] = useState({
+		login: '',
+		password: '',
+	})
+	const [errors, setErrors] = useState({
 		login: '',
 		password: '',
 	})
@@ -14,15 +30,30 @@ const Login = () => {
 		setForm({ ...form, [e.target.name]: e.target.value })
 	}
 
-	const setLogin = useUser(state => state.setLogin)
-	const setPassword = useUser(state => state.setPassword)
+	const validateForm = () => {
+		const newErrors = {
+			login: '',
+			password: '',
+		}
 
-	const getUser = useUser(state => state.getUser)
+		if (!form.login) {
+			newErrors.login = 'Поле "Логин" обязательно для заполнения'
+		}
+
+		if (!form.password) {
+			newErrors.password = 'Поле "Пароль" обязательно для заполнения'
+		} else if (!newErrors.password && !newErrors.login) {
+			return true
+		}
+		setErrors(newErrors)
+	}
 
 	const login = () => {
-		setLogin(form.login)
-		setPassword(form.password)
-		getUser()
+		if (validateForm()) {
+			setLogin(form.login)
+			setPassword(form.password)
+			getUser()
+		}
 	}
 
 	return (
@@ -35,16 +66,18 @@ const Login = () => {
 				<div className={styles.section}>
 					<div className={styles.section__title}>Вход</div>
 					<div className={styles.section__list}>
+						{errors.login && <span className={styles.error}>{errors.login}</span>}
 						<div className={styles.section__list__field}>
 							<input type="text" name="login" placeholder="Логин" value={form.login} onChange={handleChange} />
 						</div>
+						{errors.password && <span className={styles.error}>{errors.password}</span>}
 						<div className={styles.section__list__field}>
 							<input type="password" name="password" placeholder="Пароль" value={form.password} onChange={handleChange} />
 						</div>
 					</div>
 					<div className={styles.section__bottom}>
 						<div className={styles.section__bottom__button}>
-							<a onClick={login}>Войти</a>
+							<a onClick={() => login()}>Войти</a>
 						</div>
 						<div className={styles.section__bottom__link}>
 							Нет аккаунта?{' '}

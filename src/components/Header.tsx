@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from '../scss/components/Header.module.sass'
-import { useManga } from '../store'
+import { useManga, useUser } from '../store'
 import { Drawer } from './Drawer'
 import { BookLogo, CartIcon, ExitIcon, HeartIcon, UserIcon } from './UI/icons/Icons'
 
 const Header = () => {
 	const cartValue = useManga(state => state.cartValue)
 	const [cartOpened, setCartOpened] = useState(false)
+	const exit = useUser(state => state.exit)
 
 	return (
 		<>
@@ -35,7 +36,7 @@ const Header = () => {
 						</Link>
 					</li>
 					<li>
-						<Link to={'/login'} className={styles.header__list__button}>
+						<Link to={'/login'} onClick={() => exit()} className={styles.header__list__button}>
 							<ExitIcon />
 							<p>Выход</p>
 						</Link>

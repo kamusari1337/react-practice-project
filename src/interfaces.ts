@@ -25,6 +25,7 @@ export interface MangaStore {
 	favorites: Manga[]
 	purchases: Manga[]
 	similarManga: Manga[]
+	setUser: () => void
 	getManga: () => Promise<void>
 	getCart: () => Promise<void>
 	getFavorites: () => Promise<void>
@@ -39,12 +40,15 @@ export interface MangaStore {
 
 export interface UserStore {
 	userId: number | null
-	username: string
-	password: string
-	email: string
+	username: string | null
+	password: string | null
+	email: string | null
 	isAuth: boolean
 	setLogin: (login: string) => void
 	setPassword: (password: string) => void
+	setEmail: (email: string) => void
 	getUser: () => void
+	register: () => Promise<void>
+	confirm: (code: string) => Promise<void>
 	exit: () => void
 }

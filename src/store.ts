@@ -1,12 +1,12 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { addToUserCart, addToUserFavorite, auth, getSimilar, getUserCart, getUserFavorite, getUserManga, getUserPopularManga, removeAllFromUserCart, removeFromUserCart, removeFromUserFavorite } from './api'
+import { addToUserCart, addToUserFavorite, auth, confirmUser, getSimilar, getUserCart, getUserFavorite, getUserManga, getUserPopularManga, registerUser, removeAllFromUserCart, removeFromUserCart, removeFromUserFavorite } from './api'
 import { Cart, Manga, MangaStore, UserStore } from './interfaces'
 
 export const useManga = create(
 	persist<MangaStore>(
 		(set, get) => ({
-			userId: JSON.parse(localStorage.getItem('user')!),
+			userId: 0,
 			mangas: [],
 			popular: [],
 			cart: [],
@@ -14,6 +14,10 @@ export const useManga = create(
 			favorites: [],
 			purchases: [],
 			similarManga: [],
+			setUser: () => {
+				const id = JSON.parse(localStorage.getItem('user')!).state.userId
+				set({ userId: id })
+			},
 			getManga: async () => {
 				const mangas: Manga[] = await getUserManga(get().userId)
 				const popular: Manga[] = await getUserPopularManga(get().userId)
@@ -124,19 +128,27 @@ export const useUser = create(
 	persist<UserStore>(
 		(set, get) => {
 			return {
-				userId: 1,
-				username: 'user123',
-				password: '123',
-				email: '123',
+				userId: null,
+				username: null,
+				password: null,
+				email: null,
 				isAuth: false,
 				setLogin: login => set({ username: login }),
 				setPassword: password => set({ password: password }),
+				setEmail: email => set({ email: email }),
 				getUser: async () => {
-					const response = await auth(get().username, get().password, get().email)
-					set({ userId: response.id, isAuth: true })
+					const response = await auth(get().username!, get().password!)
+					set({ userId: response.user_id, isAuth: true })
+				},
+				register: async () => {
+					await registerUser(get().username!, get().password!, get().email!)
+				},
+				confirm: async (code: string) => {
+					const response = await confirmUser(code, get().username!, get().password!, get().email!)
+					return response.data
 				},
 				exit: () => {
-					set({ userId: null, isAuth: false })
+					set({ userId: null, username: null, password: null, email: null, isAuth: false })
 				},
 			}
 		},
