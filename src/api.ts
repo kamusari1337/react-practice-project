@@ -44,6 +44,13 @@ export const registerUser = async (username: string, psw: string, email: string)
 	return response.data
 }
 
+export const purchaseManga = async (userId: number, cardNumber: string) => {
+	await API.put('/purchase_manga', {
+		user_id: userId,
+		card_number: cardNumber,
+	})
+}
+
 export const getUserManga = async <Manga>(id: number) => {
 	const response = await API.get<Manga>(`/users/${id}/manga`)
 	return response.data

@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { addToUserCart, addToUserFavorite, auth, confirmUser, getSimilar, getUserCart, getUserFavorite, getUserManga, getUserPopularManga, registerUser, removeAllFromUserCart, removeFromUserCart, removeFromUserFavorite } from './api'
+import { addToUserCart, addToUserFavorite, auth, confirmUser, getSimilar, getUserCart, getUserFavorite, getUserManga, getUserPopularManga, purchaseManga, registerUser, removeAllFromUserCart, removeFromUserCart, removeFromUserFavorite } from './api'
 import { Cart, Manga, MangaStore, UserStore } from './interfaces'
 
 export const useManga = create(
@@ -38,6 +38,10 @@ export const useManga = create(
 			getPurchased: async () => {
 				const purchases: Manga[] = await getUserManga(get().userId)
 				set({ purchases: purchases })
+			},
+
+			makePayment: async (cardNumber: string) => {
+				await purchaseManga(get().userId, cardNumber)
 			},
 
 			getSimilarManga: async id => {

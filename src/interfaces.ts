@@ -30,6 +30,7 @@ export interface MangaStore {
 	getCart: () => Promise<void>
 	getFavorites: () => Promise<void>
 	getPurchased: () => Promise<void>
+	makePayment: (cardNumber: string) => Promise<void>
 	getSimilarManga: (id: number) => Promise<void>
 	addToCart: (manga: Manga) => Promise<void>
 	removeFromCart: (id: number) => Promise<void>

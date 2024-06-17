@@ -10,8 +10,36 @@ const PayModal = ({ onClose }: PayModalProps) => {
 	const [numberValue, setNumberValue] = useState('')
 	const [dateValue, setDateValue] = useState('')
 	const [cvvValue, setCvvValue] = useState('')
+	const [error, setError] = useState({
+		message: '',
+	})
+
+	const validate = () => {
+		const newError = {
+			message: '',
+		}
+
+		if (!numberValue) {
+			newError.message = 'Поле "Номер карты" обязательно для заполнения'
+			setError(newError)
+			return
+		} else if (!dateValue) {
+			newError.message = 'Поле "Дата карты" обязательно для заполнения'
+			setError(newError)
+			return
+		} else if (!cvvValue) {
+			newError.message = 'Поле "CVV" обязательно для заполнения'
+			setError(newError)
+			return
+		} else {
+			newError.message = ''
+			setError(newError)
+			return true
+		}
+	}
 
 	const cartValue = useManga(state => state.cartValue)
+	const makePayment = useManga(state => state.makePayment)
 
 	const formatInput = (input: string) => {
 		const digitsOnly = input.replace(/\D/g, '')
@@ -42,10 +70,17 @@ const PayModal = ({ onClose }: PayModalProps) => {
 		setNumberValue(formattedValue)
 	}
 
+	const handleClick = () => {
+		if (validate()) {
+			makePayment()
+		}
+	}
+
 	return (
 		<div className={styles.modal_overlay} onClick={onClose}>
 			<div className={styles.modal} onClick={e => e.stopPropagation()}>
 				<div className={styles.modal__title}>Оформление заказа</div>
+				{error.message && <span className={styles.error}>{error.message}</span>}
 				<input className={styles.card__pan} type="text" value={numberValue} onChange={handleNumberChange} placeholder="0000 0000 0000 0000" maxLength={19}></input>
 				<div className={styles.card__data}>
 					<input className={styles.card__date} type="text" value={dateValue} onChange={handleDateChange} placeholder="ММ/ГГ" maxLength={5} />
@@ -55,7 +90,9 @@ const PayModal = ({ onClose }: PayModalProps) => {
 					<span>Итого: </span>
 					<b>{cartValue} руб.</b>
 				</div>
-				<div className={styles.modal__button}>Оформить</div>
+				<div onClick={handleClick} className={styles.modal__button}>
+					Оформить
+				</div>
 			</div>
 		</div>
 	)
