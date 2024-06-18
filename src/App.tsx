@@ -17,18 +17,10 @@ const App = () => {
 
 	useEffect(() => {
 		isAuth ? navigate('/') : navigate('/login')
-	}, [isAuth])
-
-	useEffect(() => {
-		if (isAuth) {
-			navigate('/')
-			setUser()
-			getManga()
-			getCart()
-		} else {
-			navigate('/login')
-		}
-	}, [])
+		setUser()
+		getManga()
+		getCart()
+	}, [getCart, getManga, isAuth, navigate, setUser])
 
 	return (
 		<>
