@@ -72,7 +72,8 @@ const PayModal = ({ onClose }: PayModalProps) => {
 
 	const handleClick = () => {
 		if (validate()) {
-			makePayment()
+			makePayment(numberValue)
+			window.location.reload()
 		}
 	}
 

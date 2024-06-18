@@ -9,15 +9,39 @@
 	margin: 0 auto
 	padding: $section-padding
 
-	font-weight: 500
 	background-color: $white
 	border-radius: $section-border-radius
 	.section__title
 		text-align: left
 		font-size: 24px
+		font-weight: 500
 		padding-bottom: 20px
 	.section__list
 		display: flex
+		flex-direction: column
 		flex-wrap: wrap
 		row-gap: $list-row-gap
 		column-gap: $list-col-gap
+		.section__list__purchases
+			display: flex
+			flex-direction: column
+			padding: 20px 20px
+			border-radius: $section-border-radius
+			background: rgba($accent, 30%)
+			.purchase__info
+				padding: 10px
+				font-size: 24px
+				color: $accent
+				display: flex
+				justify-content: space-between
+				column-gap: 10px
+				align-items: center
+				.purchase__extra_info
+					display: flex
+					column-gap: 10px
+			.purchase__content
+				display: flex
+				flex-direction: row
+				column-gap: 30px
+				overflow: auto
+				max-width: calc($section-container-width - 40px)

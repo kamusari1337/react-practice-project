@@ -71,6 +71,11 @@ export const getUserFavorite = async <Manga>(id: number) => {
 	return response.data
 }
 
+export const getUserPurchased = async <Manga>(userId: number) => {
+	const response = await API.get<Manga>(`/users/${userId}/purchased`)
+	return response.data
+}
+
 export const getSimilar = async <Manga>(id: number) => {
 	const response = await API.get<Manga>(`/similar_manga/${id}`)
 	return response.data

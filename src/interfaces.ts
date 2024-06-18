@@ -16,6 +16,12 @@ export interface Cart {
 	amount_of_buying: number
 }
 
+export interface Purchase {
+	code: string
+	content: Manga[]
+	sum: number
+}
+
 export interface MangaStore {
 	userId: number
 	mangas: Manga[]
@@ -23,7 +29,7 @@ export interface MangaStore {
 	cart: Manga[]
 	cartValue: number
 	favorites: Manga[]
-	purchases: Manga[]
+	purchases: Purchase[]
 	similarManga: Manga[]
 	setUser: () => void
 	getManga: () => Promise<void>

@@ -1,0 +1,41 @@
+@import ../_base
+
+.card
+	transition: $card-hover-transition
+
+	border: $card-border
+	border-radius: $card-border-radius
+
+	font-size: 14px
+	font-weight: 500
+
+	background: $white
+	cursor: pointer
+	&:hover
+		box-shadow: $card-box-shadow
+		transform: translateY(-5px)
+
+	.card__cover
+		width: $purchased-card-cover-width
+		height: $purchased-card-cover-height
+		object-fit: cover
+		border-radius: $cover-border-radius
+	.cart__info
+		padding: 10px
+		.card__title
+			max-width: calc( $purchased-card-cover-width - 26px )
+			margin: 10px 0
+			overflow: hidden
+			white-space: nowrap
+			text-overflow: ellipsis
+		.card__bottomLine
+			display: flex
+			align-items: center
+			justify-content: space-between
+			.card__bottomLine__price
+				font-size: 14px
+				display: flex
+				column-gap: 8px
+				flex-direction: row
+				b
+					font-weight: 600

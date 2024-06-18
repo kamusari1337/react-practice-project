@@ -20,7 +20,7 @@ function Manga() {
 
 	useEffect(() => {
 		getSimilarManga(id)
-	}, [id])
+	}, [getSimilarManga, id])
 
 	const onClickFavorite = () => {
 		manga.isFavorite ? removeFromFavorite(id) : addToFavorite(manga)
@@ -48,9 +48,9 @@ function Manga() {
 							{manga.isFavorite ? <LikeFilled onClick={onClickFavorite} /> : <Like onClick={onClickFavorite} />}
 							{manga.inCart > 0 ? (
 								<>
-									<PlusFilled onClick={onClickPlus} />
-									<MinusFilled onClick={onClickMinus} />
 									<b className={styles.section__left__actions__count}>{manga.inCart}</b>
+									<MinusFilled onClick={onClickMinus} />
+									<PlusFilled onClick={onClickPlus} />
 								</>
 							) : (
 								<Plus onClick={onClickPlus} />
